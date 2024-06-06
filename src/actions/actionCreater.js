@@ -1,4 +1,4 @@
-import { ACCOUT_INFORMATION, LOGIN_INFORMATION_CHANGE, REGISTER_INFORMATION_CHANGE } from "./actionTypes"
+import { ACCOUT_INFORMATION, LOGIN_INFORMATION_CHANGE, REGISTER_INFORMATION_CHANGE, TODO_INFORMATION_CHANGE } from "./actionTypes"
 
 export const loginInformationChange = (data) => {
     return {
@@ -17,6 +17,13 @@ export const registerInformationChange = (data) => {
 export const accoutInformation = (data) => {
     return {
         type: ACCOUT_INFORMATION,
+        payload: data
+    }
+}
+
+export const todoInformationChange = (data) => {
+    return {
+        type: TODO_INFORMATION_CHANGE,
         payload: data
     }
 }

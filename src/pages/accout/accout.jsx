@@ -50,6 +50,8 @@ const Accout = () => {
                 avatarUrl: ''
             }))
 
+            document.cookie = "auth=chickenchicken; path=/";
+
             navigate('/home');
         }, 250);
 
