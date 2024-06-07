@@ -10,6 +10,9 @@ import NotifyIcon from '../../assets/icon_notify.png';
 import Overview from '../../components/overview';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import StatusSelector from '../../components/statusSelector';
+import PrioritySelector from '../../components/prioritySelector';
+import DeadlineSelector from '../../components/deadlineSelector';
 
 const Home = () => {
 
@@ -80,35 +83,14 @@ const Home = () => {
                                 <span className='custom-list-item mx-5 text-[18px] font-bold text-green-primary cursor-pointer relative'>Overdue</span>
                             </div>
                             <div className='flex flex-row items-center'>
-                                <div className='flex flex-row items-center px-3 rounded-md mx-2 shadow-sm shadow-slate-400'>
-                                    <span className='font-semibold text-[15px]'>Priority</span>
-                                    <div className='w-[3px] h-4 rounded-md mx-2 bg-green-primary'></div>
-                                    <select className='w-[100px] h-[30px] bg-transparent font-semibold text-[15px] cursor-pointer outline-none'>
-                                        <option value="all">All</option>
-                                        <option value="today">High</option>
-                                        <option value="tomorrow">Normal</option>
-                                        <option value="week">Slow</option>
-                                    </select>
+                                <div>
+                                    <PrioritySelector />
                                 </div>
-                                <div className='flex flex-row items-center px-3 rounded-md mx-2 shadow-sm shadow-slate-400'>
-                                    <span className='font-semibold text-[15px]'>Status</span>
-                                    <div className='w-[3px] h-4 rounded-md mx-2 bg-green-primary'></div>
-                                    <select className='w-[100px] h-[30px] bg-transparent font-semibold text-[15px] cursor-pointer outline-none'>
-                                        <option value="all">All</option>
-                                        <option value="today">To do</option>
-                                        <option value="tomorrow">In progress</option>
-                                        <option value="week">Done</option>
-                                    </select>
+                                <div>
+                                    <StatusSelector />
                                 </div>
-                                <div className='flex flex-row items-center px-3 rounded-md mx-2 shadow-sm shadow-slate-400'>
-                                    <span className='font-semibold text-[15px]'>Deadline</span>
-                                    <div className='w-[3px] h-4 rounded-md mx-2 bg-green-primary'></div>
-                                    <select className='w-[100px] h-[30px] bg-transparent font-semibold text-[15px] cursor-pointer outline-none'>
-                                        <option value="all">All</option>
-                                        <option value="today">Today</option>
-                                        <option value="tomorrow">Tomorrow</option>
-                                        <option value="week">This week</option>
-                                    </select>
+                                <div>
+                                    <DeadlineSelector />
                                 </div>
                             </div>
                             <div className='flex justify-end px-3'>
