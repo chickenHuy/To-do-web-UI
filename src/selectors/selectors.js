@@ -3,3 +3,4 @@ export const registerInformationChangeSelector = (state) => state.registerReduce
 export const accoutInformationSelector = (state) => state.accoutReducer.information;
 export const todoInformationChangeSelector = (state) => state.todoReducer.information;
 export const filterInformationChangeSelector = (state) => state.filterReducer.information;
+export const showFilterSelector = (state) => state.showFilterReducer.information;

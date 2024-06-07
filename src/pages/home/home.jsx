@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import StatusSelector from '../../components/statusSelector';
 import PrioritySelector from '../../components/prioritySelector';
 import DeadlineSelector from '../../components/deadlineSelector';
+import { useDispatch } from 'react-redux';
 
 const Home = () => {
 
@@ -21,11 +22,25 @@ const Home = () => {
     }, []);
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const token = Cookies.get('auth');
     if (token === undefined) {
         navigate('/');
     }
+
+    const hiddenFilterOptions = (event) => {
+        if (event.target === event.currentTarget) {
+          dispatch({
+            type: 'todo/show-filter',
+            payload: {
+              status: 'hidden',
+              priority: 'hidden',
+              deadline: 'hidden',
+            },
+          });
+        }
+      };
 
     return (
         <div className='wrapper w-screen h-screen flex flex-col flex-grow bg-green-secondary'>
@@ -45,7 +60,7 @@ const Home = () => {
                 </div>
             </div>
             <div className="wrapper__body h-full flex flex-row">
-                <div className="wrapper__navigate rounded-b-lg min-w-[200px] sm:min-w-[300px] md:min-w-[350px] h-full bg-green-primary flex flex-col items-center overflow-auto">
+                <div className="wrapper__navigate rounded-b-lg min-w-[200px] md:min-w-[300px] xl:min-w-[350px] h-full bg-green-primary flex flex-col items-center overflow-auto">
                     <div className='w-3/4 h-[1px] rounded-md bg-black-primary'></div>
                     <div className="navigate-list-main w-full h-fix my-5">
                         <ListItem name={'My day'} iconSrc={SunIcon} />
@@ -73,30 +88,36 @@ const Home = () => {
                         <Overview />
                     </div>
 
-
-                    <div className="body-todo mx-3 mb-3 flex-grow">
-                        <div className='todo-header w-full h-fit py-1 flex flex-row justify-between items-center'>
-                            <div className='w-fit h-fit flex flex-row'>
-                                <span className='custom-list-item mx-5 text-[18px] font-bold text-green-primary cursor-pointer relative'>To Do</span>
-                                <span className='custom-list-item mx-5 text-[18px] font-bold text-green-primary cursor-pointer relative'>In Progress</span>
-                                <span className='custom-list-item mx-5 text-[18px] font-bold text-green-primary cursor-pointer relative'>Done</span>
-                                <span className='custom-list-item mx-5 text-[18px] font-bold text-green-primary cursor-pointer relative'>Overdue</span>
-                            </div>
-                            <div className='flex flex-row items-center'>
-                                <div>
-                                    <PrioritySelector />
+                    <div className="body-todo mx-1 mb-3 flex-grow" onClick={hiddenFilterOptions}>
+                        <div className='todo-header w-full h-fit py-1 flex flex-col'>
+                            <div className="header-search flex xl:flex-row flex-col xl:items-center p-2 pt-0">
+                                <div className='flex flex-row justify-between items-center'>
+                                    <div>
+                                        <PrioritySelector />
+                                    </div>
+                                    <div>
+                                        <StatusSelector />
+                                    </div>
+                                    <div>
+                                        <DeadlineSelector />
+                                    </div>
                                 </div>
-                                <div>
-                                    <StatusSelector />
-                                </div>
-                                <div>
-                                    <DeadlineSelector />
+                                <div className='xl:w-[25%] xl:mt-0 xl:ml-3 mt-2 w-full flex-grow xl:flex-grow-0'>
+                                    <input className='w-full h-[40px] rounded-[70px] px-5 outline-none text-black-primary bg-transparent shadow-sm shadow-slate-400 border-[1px] border-slate-300' type="text" placeholder='Search task' />
                                 </div>
                             </div>
-                            <div className='flex justify-end px-3'>
-                                <div className='w-fit h-fit py-3 px-7 rounded-[50px] flex flex-row items-center bg-green-primary shadow-md shadow-slate-500 transition hover:scale-105 cursor-pointer'>
-                                    <img className='w-[25px] h-[25px] mr-3' src={AddIcon} alt="" />
-                                    <span className='text-[17px] font-bold'>New task</span>
+                            <div className="header-navigat flex flex-row items-center justify-between">
+                                <div className='w-fit h-fit flex flex-row'>
+                                    <span className='custom-list-item mx-5 text-[18px] font-bold text-green-primary cursor-pointer relative'>To Do</span>
+                                    <span className='custom-list-item mx-5 text-[18px] font-bold text-green-primary cursor-pointer relative'>In Progress</span>
+                                    <span className='custom-list-item mx-5 text-[18px] font-bold text-green-primary cursor-pointer relative'>Done</span>
+                                    <span className='custom-list-item mx-5 text-[18px] font-bold text-green-primary cursor-pointer relative'>Overdue</span>
+                                </div>
+                                <div className='flex justify-end px-3'>
+                                    <div className='w-fit h-fit py-3 px-7 rounded-[50px] flex flex-row items-center bg-green-primary shadow-md shadow-slate-500 transition hover:scale-105 cursor-pointer'>
+                                        <img className='w-[25px] h-[25px] mr-3' src={AddIcon} alt="" />
+                                        <span className='text-[17px] font-bold'>New task</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
