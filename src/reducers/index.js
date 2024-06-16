@@ -1,5 +1,6 @@
 import AccoutReducer from "./accoutReducer";
 import FilterReducer from "./filterReducer";
+import ListTaskNavigateReducer from "./listTaskNagivateReducer";
 import LoginReducer from "./loginReducer";
 import RegisterReducer from "./registerReducer";
 import ShowFilterReducer from "./showFilterReducer";
@@ -13,6 +14,7 @@ const rootReducer = (state = {}, action) => {
         todoReducer: TodoReducer(state.todoReducer, action),
         filterReducer: FilterReducer(state.filterReducer, action),
         showFilterReducer: ShowFilterReducer(state.showFilterReducer, action),
+        listTaskNavigateReducer: ListTaskNavigateReducer(state.listTaskNavigateReducer, action),
     }
 }
 

@@ -10,10 +10,10 @@ import NotifyIcon from '../../assets/icon_notify.png';
 import Overview from '../../components/overview';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
-import StatusSelector from '../../components/statusSelector';
-import PrioritySelector from '../../components/prioritySelector';
-import DeadlineSelector from '../../components/deadlineSelector';
 import { useDispatch } from 'react-redux';
+import HomeFilter from '../../components/homeFilter';
+import HomeListTask from '../../components/homeListTask';
+import ListTaskHeader from '../../components/listTaskHeader';
 
 const Home = () => {
 
@@ -31,16 +31,16 @@ const Home = () => {
 
     const hiddenFilterOptions = (event) => {
         if (event.target === event.currentTarget) {
-          dispatch({
-            type: 'todo/show-filter',
-            payload: {
-              status: 'hidden',
-              priority: 'hidden',
-              deadline: 'hidden',
-            },
-          });
+            dispatch({
+                type: 'todo/show-filter',
+                payload: {
+                    status: 'hidden',
+                    priority: 'hidden',
+                    deadline: 'hidden',
+                },
+            });
         }
-      };
+    };
 
     return (
         <div className='wrapper w-screen h-screen flex flex-col flex-grow bg-green-secondary'>
@@ -83,57 +83,22 @@ const Home = () => {
                         <ListItem iconSrc={ListIcon} isCustom={true} />
                     </div>
                 </div>
-                <div className="wrapper__body w-full h-full bg-green-secondary flex flex-col">
-                    <div className="body-overview p-3">
-                        <Overview />
-                    </div>
-
-                    <div className="body-todo mx-1 mb-3 flex-grow" onClick={hiddenFilterOptions}>
-                        <div className='todo-header w-full h-fit py-1 flex flex-col'>
-                            <div className="header-search flex xl:flex-row flex-col xl:items-center p-2 pt-0">
-                                <div className='flex flex-row justify-between items-center'>
-                                    <div>
-                                        <PrioritySelector />
-                                    </div>
-                                    <div>
-                                        <StatusSelector />
-                                    </div>
-                                    <div>
-                                        <DeadlineSelector />
-                                    </div>
-                                </div>
-                                <div className='xl:w-[25%] xl:mt-0 xl:ml-3 mt-2 w-full flex-grow xl:flex-grow-0'>
-                                    <input className='w-full h-[40px] rounded-[70px] px-5 outline-none text-black-primary bg-transparent shadow-sm shadow-slate-400 border-[1px] border-slate-300' type="text" placeholder='Search task' />
-                                </div>
-                            </div>
-                            <div className="header-navigat flex flex-row items-center justify-between">
-                                <div className='w-fit h-fit flex flex-row'>
-                                    <span className='custom-list-item mx-5 text-[18px] font-bold text-green-primary cursor-pointer relative'>To Do</span>
-                                    <span className='custom-list-item mx-5 text-[18px] font-bold text-green-primary cursor-pointer relative'>In Progress</span>
-                                    <span className='custom-list-item mx-5 text-[18px] font-bold text-green-primary cursor-pointer relative'>Done</span>
-                                    <span className='custom-list-item mx-5 text-[18px] font-bold text-green-primary cursor-pointer relative'>Overdue</span>
-                                </div>
-                                <div className='flex justify-end px-3'>
-                                    <div className='w-fit h-fit py-3 px-7 rounded-[50px] flex flex-row items-center bg-green-primary shadow-md shadow-slate-500 transition hover:scale-105 cursor-pointer'>
-                                        <img className='w-[25px] h-[25px] mr-3' src={AddIcon} alt="" />
-                                        <span className='text-[17px] font-bold'>New task</span>
-                                    </div>
-                                </div>
+                <div className="wrapper__body w-full h-full bg-green-secondary flex flex-col pt-5 pl-5 p-5">
+                    <div className="body-header w-full h-fit mb-2 flex flex-row justify-between items-center">
+                        <span className='text-[28px] font-semibold'>My day</span>
+                        <div className='flex justify-end px-3'>
+                            <div className='w-fit h-fit py-3 px-7 rounded-[50px] flex flex-row items-center bg-green-primary shadow-md shadow-slate-500 transition hover:scale-105 cursor-pointer'>
+                                <img className='w-[25px] h-[25px] mr-3' src={AddIcon} alt="" />
+                                <span className='text-[17px] font-bold'>New task</span>
                             </div>
                         </div>
-                        <div className='todo-list'>
-                            <div className="list-todo">
+                    </div>
 
-                            </div>
-                            <div className="list-inprocess">
-
-                            </div>
-                            <div className="list-done">
-
-                            </div>
-                            <div className="list-overview">
-
-                            </div>
+                    <div className="body-todo flex-grow flex flex-col overflow-hidden" onClick={hiddenFilterOptions}>
+                        < HomeFilter />
+                        <ListTaskHeader />
+                        <div className='todo-list flex-grow overflow-y-auto'>
+                            <HomeListTask />
                         </div>
                     </div>
                 </div>

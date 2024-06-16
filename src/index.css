@@ -38,7 +38,10 @@ code {
   cursor: pointer;
 }
 
-.custom-list-item:hover::after{
+.custom-list-item.active::after{
+  transform: scale(1);
+}
+.custom-list-item.hover::after{
   transform: scale(1);
 }
 .custom-list-item::after{
@@ -51,6 +54,6 @@ code {
   border-radius: 10px;
   transform: scale(0);
   transform-origin: left;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.1s ease-in-out;
   background-color: theme('colors.green-primary');
 }
