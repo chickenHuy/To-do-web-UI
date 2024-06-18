@@ -6,3 +6,4 @@ export const FILTER_INFORMATION_CHANGE = 'todo/filter-change';
 export const SHOW_FILTER = 'todo/show-filter';
 export const LIST_TASK_NAGIVATE_CHANGE = 'todo/list-task-navigate-change';
 export const SHOW_OVERVIEW = 'todo/show-overview';
+export const SHOW_TASK_SELECTOR_CHANGE = 'todo/show-task-selector-change';

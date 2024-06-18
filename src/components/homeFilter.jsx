@@ -1,7 +1,7 @@
 import React from 'react'
-import PrioritySelector from './prioritySelector';
-import StatusSelector from './statusSelector';
-import DeadlineSelector from './deadlineSelector';
+import PrioritySelector from './filterPrioritySelector';
+import StatusSelector from './filterStatusSelector';
+import DeadlineSelector from './filterDeadlineSelector';
 
 const HomeFilter = () => {
     return (

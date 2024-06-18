@@ -1,4 +1,4 @@
-import { ACCOUT_INFORMATION, FILTER_INFORMATION_CHANGE, LIST_TASK_NAGIVATE_CHANGE, LOGIN_INFORMATION_CHANGE, REGISTER_INFORMATION_CHANGE, SHOW_OVERVIEW, TODO_INFORMATION_CHANGE } from "./actionTypes"
+import { ACCOUT_INFORMATION, FILTER_INFORMATION_CHANGE, LIST_TASK_NAGIVATE_CHANGE, LOGIN_INFORMATION_CHANGE, REGISTER_INFORMATION_CHANGE, SHOW_OVERVIEW, SHOW_TASK_SELECTOR_CHANGE, TODO_INFORMATION_CHANGE } from "./actionTypes"
 
 export const loginInformationChange = (data) => {
     return {
@@ -45,6 +45,13 @@ export const listTaskNavigateChange = (data) => {
 export const showOverview = (data) => {
     return {
         type: SHOW_OVERVIEW,
+        payload: data
+    }
+}
+
+export const showTaskSelectorChange = (data) => {
+    return {
+        type: SHOW_TASK_SELECTOR_CHANGE,
         payload: data
     }
 }

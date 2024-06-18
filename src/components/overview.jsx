@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { todoInformationChangeSelector } from '../selectors/selectors';
+import { showTaskSelectorSelector, todoInformationChangeSelector } from '../selectors/selectors';
 import HighIcon from '../assets/icon_priority_high.png';
 import NormalIcon from '../assets/icon_priority_normal.png';
 import SlowIcon from '../assets/icon_priority_slow.png';
@@ -10,17 +10,56 @@ import DoneIcon from '../assets/icon_done.png';
 import OverdueIcon from '../assets/icon_overdue.png';
 import CloseIcon from '../assets/icon_close.png';
 import EditIcon from '../assets/icon_edit.png';
-import { showOverview } from '../actions/actionCreater';
+import { showOverview, showTaskSelectorChange } from '../actions/actionCreater';
+import TaskStatusSelector from './taskStatusSelector';
+import TaskDeadlineSelector from './taskDeadlineSelector';
+import TaskPrioritySelector from './taskPrioritySelector';
 
 const Overview = () => {
 
-    const todoData = useSelector(todoInformationChangeSelector);
     const dispatch = useDispatch();
+    const todoData = useSelector(todoInformationChangeSelector);
+    const showTaskSelectorData = useSelector(showTaskSelectorSelector);
 
     function setShowOverview(show) {
         dispatch(showOverview({
             showOverview: show,
         }));
+    }
+
+    const setShowListOptions = (option, show) => {
+        const status = show ? '' : 'hidden';
+
+        if (option === 'priority'){
+            dispatch(showTaskSelectorChange({
+                ...showTaskSelectorData,
+                priority: status,
+            }));
+            return;
+        }
+        if (option === 'status'){
+            dispatch(showTaskSelectorChange({
+                ...showTaskSelectorData,
+                status: status,
+            }));
+            return;
+        }
+        if (option === 'deadline'){
+            dispatch(showTaskSelectorChange({
+                ...showTaskSelectorData,
+                deadline: status,
+            }));
+            return;
+        }
+        if (option === 'all'){
+            dispatch(showTaskSelectorChange({
+                ...showTaskSelectorData,
+                priority: status,
+                status: status,
+                deadline: status,
+            }));
+            return;
+        }
     }
 
     return (
@@ -45,8 +84,11 @@ const Overview = () => {
                         <span className='px-5 font-semibold text-white-primary'>Slow</span>
                         <img className='w-[20px] h-[20px]' src={SlowIcon} alt="" />
                     </div>
-                    <div className='flex-grow flex flex-row justify-end'>
-                        <img className='w-[25px] h-[25px] cursor-pointer hover:scale-110' src={EditIcon} alt="" />
+                    <div className='flex-grow flex flex-row justify-end relative'>
+                        <TaskPrioritySelector />
+                        <img className='w-[25px] h-[25px] cursor-pointer hover:scale-110' src={EditIcon} alt="" onClick={() => {
+                            setShowListOptions('priority', showTaskSelectorData.priority === '' ? false : true);
+                        }}/>
                     </div>
                 </div>
 
@@ -56,8 +98,12 @@ const Overview = () => {
                     <div className={`py-1 px-2 rounded-[50px] bg-green-primary flex-row items-center shadow-md shadow-slate-500 ${todoData.deadline !== '' ? '' : 'hidden'}`}>
                         <span className='px-5 font-semibold text-white-primary'>{todoData.deadline}</span>
                     </div>
-                    <div className='flex-grow flex flex-row justify-end'>
-                        <img className='w-[25px] h-[25px] cursor-pointer hover:scale-110' src={EditIcon} alt="" />
+                    <div className='flex-grow flex flex-row justify-end relative'>
+                        <TaskDeadlineSelector />
+                        <img className='w-[25px] h-[25px] cursor-pointer hover:scale-110' src={EditIcon} alt="" onClick={() => {
+                            setShowListOptions('all', false);
+                            setShowListOptions('deadline', showTaskSelectorData.deadline === '' ? false : true);
+                        }}/>
                     </div>
                 </div>
 
@@ -83,8 +129,12 @@ const Overview = () => {
                         <span className='px-5 font-semibold text-white-primary'>Overdue</span>
                         <img className='w-[20px] h-[20px]' src={OverdueIcon} alt="" />
                     </div>
-                    <div className='flex-grow flex flex-row justify-end'>
-                        <img className='w-[25px] h-[25px] cursor-pointer hover:scale-110' src={EditIcon} alt="" />
+                    <div className='flex-grow flex flex-row justify-end relative'>
+                        <TaskStatusSelector />
+                        <img className='w-[25px] h-[25px] cursor-pointer hover:scale-110' src={EditIcon} alt="" onClick={() => {
+                            setShowListOptions('all', false);
+                            setShowListOptions('status', showTaskSelectorData.status === '' ? false : true);
+                        }}/>
                     </div>
                 </div>
 
@@ -94,9 +144,6 @@ const Overview = () => {
                         <div className={`flex-grow h-fit bg-slate-300 shadow-md shadow-slate-400 rounded-md px-6 py-1 ${todoData.description !== '' ? '' : 'bg-transparent shadow-none'}`}>
                             <div>{todoData.description}</div>
                         </div>
-                    </div>
-                    <div className='flex flex-row justify-end'>
-                        <img className='w-[25px] h-[25px] cursor-pointer hover:scale-110' src={EditIcon} alt="" />
                     </div>
                 </div>
             </div>
