@@ -1,7 +1,7 @@
 const initState = {
     information: {
         priority: 'high',
-        deadline: 'Chicken, chicken',
+        deadline: 'chicken',
         status: 'done',
         description: 'Chicken chicken',
     },

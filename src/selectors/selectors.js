@@ -5,3 +5,4 @@ export const todoInformationChangeSelector = (state) => state.todoReducer.inform
 export const filterInformationChangeSelector = (state) => state.filterReducer.information;
 export const showFilterSelector = (state) => state.showFilterReducer.information;
 export const listTaskNavigateChangeSelector = (state) => state.listTaskNavigateReducer.information;
+export const showOverviewSelector = (state) => state.overviewReducer.information;

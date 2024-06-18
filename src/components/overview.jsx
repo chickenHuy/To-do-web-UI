@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { todoInformationChangeSelector } from '../selectors/selectors';
 import HighIcon from '../assets/icon_priority_high.png';
 import NormalIcon from '../assets/icon_priority_normal.png';
@@ -8,20 +8,28 @@ import TodoIcon from '../assets/icon_todo.png';
 import InprogressIcon from '../assets/icon_inprogress.png';
 import DoneIcon from '../assets/icon_done.png';
 import OverdueIcon from '../assets/icon_overdue.png';
+import CloseIcon from '../assets/icon_close.png';
+import EditIcon from '../assets/icon_edit.png';
+import { showOverview } from '../actions/actionCreater';
 
 const Overview = () => {
 
     const todoData = useSelector(todoInformationChangeSelector);
+    const dispatch = useDispatch();
+
+    function setShowOverview(show) {
+        dispatch(showOverview({
+            showOverview: show,
+        }));
+    }
 
     return (
-        <div className='w-full bg-white-primary rounded-lg py-3 px-7 shadow-md'>
-            <div className='flex flex-row justify-between items-center'>
-                <span className='px-3 pb-2 text-[20px] font-bold text-green-primary'>Task Overview</span>
-                <div className='w-fit h-hit py-1 px-9 rounded-lg bg-green-primary font-semibold text-black-primary shadow-md shadow-slate-500 transition hover:scale-105 cursor-pointer'>Edit</div>
-            </div>
+        <div className='w-full min-w-[425px] bg-white-primary rounded-lg px-7 shadow-lg shadow-slate-500 border-[1px] border-slate-300 py-10 relative'>
+            <img className='w-[20px] h-[20px] absolute top-2 right-2 cursor-pointer hover:scale-110 duration-75' src={CloseIcon} alt="" onClick={() => setShowOverview(false)} />
+            <span className='px-3 pb-2 text-[20px] font-bold text-green-primary'>Task Overview</span>
             <div>
-                <div className='px-3 py-[3px] flex flex-row justify-start items-center'>
-                    <span className='w-[15%] min-w-[100px] font-bold text-[15px]'>Priority</span>
+                <div className='px-3 py-[3px] flex flex-row justify-start items-center my-2'>
+                    <span className='min-w-[120px] font-bold text-[15px]'>Priority</span>
                     <div className='w-[3px] h-4 rounded-md mr-7 bg-green-primary'></div>
                     <div className={`py-1 px-2 rounded-[50px] bg-slate-950 flex flex-row items-center animate-bounce shadow-md shadow-slate-800 ${todoData.priority === 'high' ? '' : 'hidden'}`} style={{ animationDuration: '0.3s' }}>
                         <span className='px-5 font-semibold text-white-primary'>High</span>
@@ -37,16 +45,24 @@ const Overview = () => {
                         <span className='px-5 font-semibold text-white-primary'>Slow</span>
                         <img className='w-[20px] h-[20px]' src={SlowIcon} alt="" />
                     </div>
+                    <div className='flex-grow flex flex-row justify-end'>
+                        <img className='w-[25px] h-[25px] cursor-pointer hover:scale-110' src={EditIcon} alt="" />
+                    </div>
                 </div>
-                <div className='px-3 py-[3px] flex flex-row justify-start items-center'>
-                    <span className='w-[15%] min-w-[100px] font-bold text-[15px]'>Deadline</span>
+
+                <div className='px-3 py-[3px] flex flex-row justify-start items-center my-2'>
+                    <span className='min-w-[120px] font-bold text-[15px]'>Deadline</span>
                     <div className='w-[3px] h-4 rounded-md mr-7 bg-green-primary'></div>
                     <div className={`py-1 px-2 rounded-[50px] bg-green-primary flex-row items-center shadow-md shadow-slate-500 ${todoData.deadline !== '' ? '' : 'hidden'}`}>
                         <span className='px-5 font-semibold text-white-primary'>{todoData.deadline}</span>
                     </div>
+                    <div className='flex-grow flex flex-row justify-end'>
+                        <img className='w-[25px] h-[25px] cursor-pointer hover:scale-110' src={EditIcon} alt="" />
+                    </div>
                 </div>
-                <div className='px-3 py-[3px] flex flex-row justify-start items-center'>
-                    <span className='w-[15%] min-w-[100px] font-bold text-[15px] break-words'>Status</span>
+
+                <div className='px-3 py-[3px] flex flex-row justify-start items-center my-2'>
+                    <span className='min-w-[120px] font-bold text-[15px] break-words'>Status</span>
                     <div className='w-[3px] h-4 rounded-md mr-7 bg-green-primary'></div>
                     <div className={`py-1 px-2 rounded-[50px] bg-slate-600 flex flex-row items-center shadow-md shadow-slate-800 ${todoData.status === 'todo' ? '' : 'hidden'}`}>
                         <span className='px-5 font-semibold text-white-primary'>To Do</span>
@@ -67,13 +83,20 @@ const Overview = () => {
                         <span className='px-5 font-semibold text-white-primary'>Overdue</span>
                         <img className='w-[20px] h-[20px]' src={OverdueIcon} alt="" />
                     </div>
+                    <div className='flex-grow flex flex-row justify-end'>
+                        <img className='w-[25px] h-[25px] cursor-pointer hover:scale-110' src={EditIcon} alt="" />
+                    </div>
                 </div>
-                <div className='px-3 pt-[5px] flex flex-row justify-start items-start'>
-                    <span className='w-[15%] min-w-[100px] font-bold text-[15px]'>Description</span>
-                    <div className='h-fit flex-grow pl-7 border-l-[3px] border-green-primary'>
-                        <div className={`flex-grow h-fit bg-slate-300 shadow-md shadow-slate-400 rounded-[50px] p-1 ${todoData.description !== '' ? '' : 'bg-transparent shadow-none'}`}>
-                            <textarea className='w-full h-5 px-5 outline-none bg-transparent text-[16px]' readOnly>{todoData.description}</textarea>
+
+                <div className='px-3 pt-[5px] flex flex-row justify-start items-start my-2'>
+                    <span className='min-w-[120px] font-bold text-[15px]'>Description</span>
+                    <div className='h-fit flex-grow pl-7 mr-7 border-l-[3px] border-green-primary'>
+                        <div className={`flex-grow h-fit bg-slate-300 shadow-md shadow-slate-400 rounded-md px-6 py-1 ${todoData.description !== '' ? '' : 'bg-transparent shadow-none'}`}>
+                            <div>{todoData.description}</div>
                         </div>
+                    </div>
+                    <div className='flex flex-row justify-end'>
+                        <img className='w-[25px] h-[25px] cursor-pointer hover:scale-110' src={EditIcon} alt="" />
                     </div>
                 </div>
             </div>

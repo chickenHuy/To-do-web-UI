@@ -59,7 +59,7 @@ const ListTaskHeader = () => {
 
     return (
         <div>
-            <div className="header-navigate">
+            <div className="header-navigate mb-5 px-5">
                 <div className='w-fit h-fit flex flex-row'>
                     <span onMouseLeave={() => updateNavigate('unhover', '')} onMouseEnter={() => updateNavigate('hover', 'todo')} ref={todoNavigateRef} onClick={() => updateNavigate('click', 'todo')} className='custom-list-item active item-todo mr-10 text-[18px] font-bold text-green-primary cursor-pointer relative'>To Do</span>
                     <span onMouseLeave={() => updateNavigate('unhover', '')} onMouseEnter={() => updateNavigate('hover', 'inprocess')} ref={inprocessNavigateRef} onClick={() => updateNavigate('click', 'inprocess')} className='custom-list-item item-inprocess mr-10 text-[18px] font-bold text-green-primary cursor-pointer relative'>In Progress</span>

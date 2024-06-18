@@ -6,7 +6,7 @@ import DeadlineSelector from './deadlineSelector';
 const HomeFilter = () => {
     return (
         <div>
-            <div className="header-search flex xl:flex-row flex-col xl:items-center my-2">
+            <div className="header-search flex xl:flex-row flex-col xl:items-center mt-2 mb-3 px-5">
                 <div className='flex flex-row justify-between items-center'>
                     <div>
                         <PrioritySelector />
