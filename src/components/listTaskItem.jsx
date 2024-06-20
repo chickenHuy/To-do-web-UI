@@ -29,7 +29,7 @@ const ListTaskItem = ({ id, priority, description, deadline, status }) => {
     }
 
     return (
-        <div className='w-full h-full bg-white-primary cursor-pointer p-3 rounded-md shadow-md shadow-slate-400 hover:scale-[1.03] duration-75' onClick={() => {
+        <div className='w-full h-full bg-white-primary cursor-pointer p-3 rounded-md shadow-md shadow-slate-400 hover:scale-[1.03] duration-75 flex flex-col' onClick={() => {
             setDataOfOverview();
             setShowOverview(true);
         }}>
@@ -40,8 +40,10 @@ const ListTaskItem = ({ id, priority, description, deadline, status }) => {
                 </div>
                 <img className='w-[26px] h-[26px] rounded-[50%] p-[5px] hover:bg-slate-300' src={TripleDotIcon} alt="" />
             </div>
-            <div className="text-container bg-slate-100 rounded-md shadow-sm shadow-slate-300 p-3 my-3">
-                {description !== undefined ? description : ''}
+            <div className='flex-grow'>
+                <div className="text-container bg-slate-100 rounded-md shadow-sm shadow-slate-300 p-3 my-3">
+                    {description !== undefined ? description : ''}
+                </div>
             </div>
             <div className='flex flex-row justify-end items-center'>
                 <span className='font-bold text-green-primary'>Deadline: </span>
