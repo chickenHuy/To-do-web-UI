@@ -286,7 +286,7 @@ const Home = () => {
         setListTaskData(listTaskFiltered);
 
         if (listTaskNavigateData.navigate !== 'custom') {
-            setListName(listTaskNavigateData.name);
+            setListName(listTaskNavigateData.name === undefined ? 'My day' : listTaskNavigateData.name);
         }
         else {
             let name = dataManager.getNameOfCustomItem(listTaskNavigateData.id);

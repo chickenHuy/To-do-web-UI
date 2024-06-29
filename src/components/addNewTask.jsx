@@ -14,13 +14,16 @@ import { showTaskSelectorChange, todoInformationChange } from '../actions/action
 import TaskStatusSelector from './taskStatusSelector';
 import TaskDeadlineSelector from './taskDeadlineSelector';
 import TaskPrioritySelector from './taskPrioritySelector';
+import { set } from 'date-fns';
 
 const AddNewTask = ({ handleCloseClick, handleAddClick }) => {
 
     const dispatch = useDispatch();
-    const todoData = useSelector(todoInformationChangeSelector);
 
+    const todoData = useSelector(todoInformationChangeSelector);
     const showTaskSelectorData = useSelector(showTaskSelectorSelector);
+    const coverSheetData = useSelector(coverSheetSelector);
+
     const containerRef = useRef(null);
     const textAreaRef = useRef(null);
 
@@ -83,6 +86,10 @@ const AddNewTask = ({ handleCloseClick, handleAddClick }) => {
     useEffect(() => {
         setDescription(todoData.description);
     }, [todoData.description]);
+
+    useEffect(() => {
+        setShowListOptions('all', false);
+    }, [coverSheetData.showCoverSheet]);
 
     useEffect(() => {
         dispatch(todoInformationChange({

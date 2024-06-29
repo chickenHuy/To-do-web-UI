@@ -5,6 +5,7 @@ import { coverSheetChange, listTaskNavigateChange } from '../actions/actionCreat
 import { coverSheetSelector, listTaskNavigateChangeSelector } from '../selectors/selectors';
 import DataManager from '../data/dataManager';
 import Cookies from 'js-cookie';
+import { set } from 'date-fns';
 
 const ListItem = ({ name, iconSrc, isCustom, navigate, id }) => {
     const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const ListItem = ({ name, iconSrc, isCustom, navigate, id }) => {
 
     function handleRenameItem() {
         dataManager.renameItemCustom(id, itemName);
+        setShowCoverSheet(false);
     }
 
     function handleRemoveItem() {
@@ -79,7 +81,6 @@ const ListItem = ({ name, iconSrc, isCustom, navigate, id }) => {
             setShowListOption(false);
             if (isEdit) {
                 handleRenameItem();
-                console.log('rename');
             }
             setIsEdit(false);
         }

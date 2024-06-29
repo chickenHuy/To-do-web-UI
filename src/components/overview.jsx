@@ -94,8 +94,12 @@ const Overview = () => {
     }
 
     useEffect(() => {
-        setDescription(todoData.description);
+        setShowListOptions('all', false);
     }, [todoData.description]);
+
+    useEffect(() => {
+        setDescription(todoData.description);
+    }, [coverSheetChange.showCoverSheet]);
 
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside);
