@@ -1,12 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react'
 import ListItem from '../../components/listItem';
 import SunIcon from '../../assets/icon_sun.png';
+import MoonIcon from '../../assets/icon_moon.png';
 import TaskIcon from '../../assets/icon_task.png';
 import CompleteIcon from '../../assets/icon_complete.png';
 import AddIcon from '../../assets/icon_add.png';
+import AddIconWhite from '../../assets/icon_add_white.png';
 import ListIcon from '../../assets/icon_list.png';
+import ListIconWhite from '../../assets/icon_list_white.png';
 import DownIcon from '../../assets/icon_down.png';
 import UpIcon from '../../assets/icon_up.png';
+import DownIconWhite from '../../assets/icon_down_white.png';
+import UpIconWhite from '../../assets/icon_up_white.png';
 import MenuIcon from '../../assets/icon_menu.png';
 import Overview from '../../components/overview';
 import Cookies from 'js-cookie';
@@ -57,12 +62,24 @@ const Home = () => {
     const [showEditProfile, setShowEditProfile] = useState(false);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [showMenu, setShowMenu] = useState(false);
+    const [darkMode, setDarkMode] = useState(false);
+    const [listName, setListName] = useState('My day');
 
     const input = useRef(null);
 
     window.addEventListener('resize', () => {
         setScreenWidth(window.innerWidth);
     });
+
+    const toggleTheme = () => {
+        setDarkMode(!darkMode);
+        if (!darkMode) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+        setCoverSheet(false, '', 'bg-transparent');
+    };
 
     const hiddenFilterOptions = () => {
         dispatch({
@@ -76,7 +93,7 @@ const Home = () => {
         });
     }
 
-    const setCoverOverSheet = (show, opacity, backgroundColor) => {
+    const setCoverSheet = (show, opacity, backgroundColor) => {
         dispatch(coverSheetChange({
             ...coverSheetData,
             showCoverSheet: show,
@@ -104,7 +121,7 @@ const Home = () => {
             }));
         }
 
-        setCoverOverSheet(show, '', '');
+        setCoverSheet(show, '', '');
     }
 
     function getListTaskBasedOnNavigate() {
@@ -234,7 +251,7 @@ const Home = () => {
 
     function handleSettingClick() {
         setShowAccountOptions(false);
-        setCoverOverSheet(true, '', 'bg-slate-700');
+        setCoverSheet(true, '', 'bg-slate-700');
         setShowEditProfile(true);
     }
 
@@ -261,12 +278,20 @@ const Home = () => {
         navigate('/');
 
         setShowAccountOptions(false);
-        setCoverOverSheet(false, '', '');
+        setCoverSheet(false, '', '');
     }
 
     useEffect(() => {
         let listTaskFiltered = getListTaskBaseOnDeadline(getListTaskBaseOnPriority(getListTaskBaseOnStatus(getListTaskBasedOnNavigate())));
         setListTaskData(listTaskFiltered);
+
+        if (listTaskNavigateData.navigate !== 'custom') {
+            setListName(listTaskNavigateData.name);
+        }
+        else {
+            let name = dataManager.getNameOfCustomItem(listTaskNavigateData.id);
+            setListName(name);
+        }
     }, [listTaskNavigateData, filterData, overviewData]);
 
     useEffect(() => {
@@ -295,31 +320,28 @@ const Home = () => {
 
     return (
         <div className='w-fit h-fit relative overflow-auto'>
-            <div className='wrapper w-screen min-w-[435px] h-screen flex flex-col flex-grow bg-green-secondary'>
-                <div className="wrapper__header rounded-br-lg min-h-[75px]  bg-green-primary flex flex-row items-center justify-between relative">
+            <div className='wrapper w-screen min-w-[435px] h-screen flex flex-col flex-grow bg-green-secondary dark:bg-dark-secondary'>
+                <div className="wrapper__header rounded-br-lg min-h-[75px]  bg-green-primary dark:bg-dark-primary flex flex-row items-center justify-between relative">
                     <div className='min-w-[250px] xl:min-w-[20%] flex justify-center items-center'>
                         <img className={`w-[35px] h-[35px] p-1 mr-2 cursor-pointer hover:scale-105 ${screenWidth <= 750 ? '' : 'hidden'}`} src={MenuIcon} alt="" onClick={() => {
                             setShowMenu(!showMenu);
-                            setCoverOverSheet(true, '', 'bg-transparent');
+                            setCoverSheet(true, '', 'bg-transparent');
                         }} />
                         <span className='text-white-primary text-[25px] font-bold'>Chicken To Do.</span>
                     </div>
                     <div className="navigate-accout w-fix h-fix px-5 flex flex-row items-center">
                         <img className='w-[50px] h-[50px] rounded-[50%]' src={accoutData.avatarUrl === '' ? DefaultAvatar : accoutData.avatarUrl} alt="" />
-                        <img className='w-[25px] h-[25px] p-1 ml-2 cursor-pointer rounded-[70px]' src={showAccountOptions ? UpIcon : DownIcon} alt="" onClick={() => {
+                        <img className='w-[25px] h-[25px] p-1 ml-2 cursor-pointer rounded-[70px]' src={showAccountOptions ? darkMode ? UpIconWhite : UpIcon : darkMode ? DownIconWhite : DownIcon} alt="" onClick={() => {
                             setShowAccountOptions(!showAccountOptions);
-                            setCoverOverSheet(!showAccountOptions, '', 'bg-transparent');
+                            setCoverSheet(!showAccountOptions, '', 'bg-transparent');
                         }} />
                     </div>
-                    <div className={`absolute z-10 right-0 top-[115%] transition origin-top-right ${showAccountOptions && coverSheetData.showCoverSheet ? 'scale-100' : 'scale-0'}`}>
-                        <AccoutOptions handleLogoutClick={handleLogoutClick} handleSettingClick={handleSettingClick} />
+                    <div className={`absolute z-10 right-0 top-[115%] duration-300 origin-top-right ${showAccountOptions && coverSheetData.showCoverSheet ? 'scale-100' : 'scale-0'}`}>
+                        {showAccountOptions && <AccoutOptions handleLogoutClick={handleLogoutClick} handleSettingClick={handleSettingClick} />}
                     </div>
                 </div>
                 <div className="wrapper__body flex-grow flex flex-row overflow-hidden">
-                    <div className={`wrapper__navigate rounded-b-lg xl:min-w-[20%] h-full bg-green-primary flex flex-col items-center overflow-auto duration-300 origin-top-left ${screenWidth <= 750 && !showMenu ? 'w-0 scale-0' : 'min-w-[250px] scale-100'} ${showMenu ? 'absolute z-10 min-w-[250px] scale-100' : 'w-0 scale-0'}`} onClick={() => {
-                        setShowMenu(false);
-                        setCoverOverSheet(false, '', '');
-                    }}>
+                    <div className={`wrapper__navigate rounded-b-lg xl:min-w-[20%] h-full bg-green-primary dark:bg-dark-primary flex flex-col items-center overflow-auto duration-300 origin-top-left`}>
                         <div className='w-3/4 h-[1px] rounded-md bg-black-primary'></div>
                         <div className="navigate-list-main w-full h-fix my-5">
                             <ListItem name={'My day'} iconSrc={SunIcon} navigate={'my-day'} id={''} />
@@ -329,34 +351,46 @@ const Home = () => {
                         <div className='w-3/4 h-[1px] rounded-md bg-black-primary'></div>
 
                         <div className='w-full h-fix p-3'>
-                            <div className='w-full h-fix flex flex-row justify-between items-center rounded-md pl-7 pr-2 py-[6px] bg-green-secondary shadow-sm shadow-white'>
-                                <input ref={input} className='bg-transparent outline-none text-[16px] w-3/4' type="text" name="" id="" placeholder='Add new list' onKeyDown={(e) => {
+                            <div className='w-full h-fix flex flex-row justify-between items-center rounded-md pl-7 pr-2 py-[6px] bg-green-secondary dark:bg-dark-secondary shadow-sm shadow-green-secondary dark:shadow-dark-secondary'>
+                                <input ref={input} className='bg-transparent outline-none text-[16px] w-3/4 dark:text-white' type="text" name="" id="" placeholder='Add new list' onKeyDown={(e) => {
                                     if (e.key === 'Enter') {
                                         handleAddNewList();
                                     }
                                 }} />
-                                <img className='w-[35px] h-[35px] cursor-pointer' src={AddIcon} alt="" onClick={() => handleAddNewList()} />
+                                <img className='w-[35px] h-[35px] cursor-pointer' src={darkMode ? AddIconWhite : AddIcon} alt="" onClick={() => handleAddNewList()} />
                             </div>
                         </div>
-                        <div className="navigate-list-custom w-full h-fix my-1 overflow-y-auto pb-20">
+                        <div className="navigate-list-custom w-full h-fix my-1 overflow-y-auto pb-20 flex-grow">
                             {listTaskCustom.map((item) => {
                                 return (
-                                    <ListItem name={item.name} iconSrc={ListIcon} navigate={'custom'} id={item.id} isCustom={true} />
+                                    <ListItem name={item.name} iconSrc={darkMode ? ListIconWhite : ListIcon} navigate={'custom'} id={item.id} isCustom={true} />
                                 );
                             })
                             }
                         </div>
+                        <div className='w-full h-fit p-3'>
+                            <div className={`w-[150px] h-[40px] px-7 py-1 mx-auto bg-green-secondary dark:bg-dark-secondary flex flex-row items-center rounded-[70px] border-[1px] border-green-secondary dark:border-dark-secondary shadow-sm shadow-green-secondary dark:shadow-dark-secondary cursor-pointer overflow-hidden relative`} onClick={toggleTheme}>
+                                <div className={`absolute right-1 flex flex-row items-center duration-500 ${!darkMode ? '' : '-translate-x-[130%] scale-0'}`}>
+                                    <span className='font-semibold text-[12px] text-dark-secondary'>LIGHT MODE</span>
+                                    <img className='w-[37px] h-[37px] p-1 rounded-[70px] duration-500 transition ml-3' src={SunIcon} alt="" />
+                                </div>
+                                <div className={`absolute left-1 flex flex-row items-center duration-500 ${darkMode ? '' : 'translate-x-[130%] scale-0'}`}>
+                                    <img className='w-[37px] h-[37px] p-1 rounded-[70px] duration-500 transition mr-3' src={MoonIcon} alt="" />
+                                    <span className='font-semibold text-[12px] text-green-secondary'>DARK MODE</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div className="wrapper__body w-full h-full bg-green-secondary flex flex-col pt-5">
+                    <div className="wrapper__body w-full h-full bg-green-secondary dark:bg-dark-secondary flex flex-col pt-5">
                         <div className="body-header w-full h-fit mb-2 flex flex-row justify-between items-center px-5">
-                            <span className='text-[28px] font-semibold'>My day</span>
+                            <span className='text-[28px] font-semibold text-black dark:text-white'>{listName}</span>
                             <div className='flex justify-end px-3'>
-                                <div className={`w-fit h-fit py-3 px-7 rounded-[50px] flex flex-row items-center bg-green-primary shadow-md shadow-slate-500 transition hover:scale-105 cursor-pointer ${listTaskNavigateData.navigate === 'task' || listTaskNavigateData.navigate === 'complete' ? 'scale-0' : 'scale-100'}`} onClick={() => {
+                                <div className={`w-fit h-fit py-3 px-7 rounded-[50px] flex flex-row items-center bg-green-primary dark:bg-dark-primary shadow-md shadow-slate-500 dark:shadow-slate-900 transition hover:scale-105 cursor-pointer ${listTaskNavigateData.navigate === 'task' || listTaskNavigateData.navigate === 'complete' ? 'scale-0' : 'scale-100'}`} onClick={() => {
                                     setShowOverview('addNewTask', true);
-                                    setCoverOverSheet(true, 'bg-opacity-70', 'bg-slate-700');
+                                    setCoverSheet(true, 'bg-opacity-70', 'bg-slate-700');
                                 }}>
-                                    <img className='w-[25px] h-[25px] mr-3' src={AddIcon} alt="" />
-                                    <span className='text-[17px] font-bold'>New task</span>
+                                    <img className='w-[25px] h-[25px] mr-3' src={darkMode ? AddIconWhite : AddIcon} alt="" />
+                                    <span className='text-[17px] font-bold dark:text-white'>New task</span>
                                 </div>
                             </div>
                         </div>
@@ -381,7 +415,7 @@ const Home = () => {
                 {showEditProfile && <EditProfile />}
             </div>
             <div className={`w-full h-full ${coverSheetData.opacity} ${coverSheetData.backgroundColor} absolute top-0 ${coverSheetData.showCoverSheet ? '' : 'hidden'}`} onClick={() => {
-                setCoverOverSheet(false, '', '');
+                setCoverSheet(false, '', '');
                 hiddenFilterOptions();
                 setShowOverview('all', false);
             }}></div>
