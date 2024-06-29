@@ -1,6 +1,7 @@
 const initState = {
     information: {
-        navigate: 'todo',
+        navigate: 'my-day',
+        id: '',
     },
 }
 

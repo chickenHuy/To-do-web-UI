@@ -1,4 +1,5 @@
 import AccoutReducer from "./accoutReducer";
+import CoverSheetReducer from "./coverSheetReducer";
 import FilterReducer from "./filterReducer";
 import ListTaskNavigateReducer from "./listTaskNagivateReducer";
 import LoginReducer from "./loginReducer";
@@ -19,6 +20,7 @@ const rootReducer = (state = {}, action) => {
         listTaskNavigateReducer: ListTaskNavigateReducer(state.listTaskNavigateReducer, action),
         overviewReducer: OverviewReducer(state.overviewReducer, action),
         showTaskSelectorReducer: ShowTaskSelectorReducer(state.showTaskSelectorReducer, action),
+        coverSheetReducer: CoverSheetReducer(state.coverSheetReducer, action),
     }
 }
 

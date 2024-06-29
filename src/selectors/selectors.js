@@ -7,3 +7,4 @@ export const showFilterSelector = (state) => state.showFilterReducer.information
 export const listTaskNavigateChangeSelector = (state) => state.listTaskNavigateReducer.information;
 export const showOverviewSelector = (state) => state.overviewReducer.information;
 export const showTaskSelectorSelector = (state) => state.showTaskSelectorReducer.information;
+export const coverSheetSelector = (state) => state.coverSheetReducer.information;

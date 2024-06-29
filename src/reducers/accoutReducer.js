@@ -1,9 +1,12 @@
 const initState = {
     information: {
+        email: '',
         firstName: '',
         lastName: '',
-        email: '',
         avatarUrl: '',
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: '',
     },
 }
 

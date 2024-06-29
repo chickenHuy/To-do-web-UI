@@ -1,8 +1,8 @@
 import HighIcon from '../assets/icon_priority_high.png';
 import Normalcon from '../assets/icon_priority_normal.png';
-import SlowIcon from '../assets/icon_priority_slow.png';
+import LowIcon from '../assets/icon_priority_slow.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { showTaskSelectorSelector, todoInformationChangeSelector } from '../selectors/selectors';
+import { listTaskNavigateChangeSelector, showTaskSelectorSelector, todoInformationChangeSelector } from '../selectors/selectors';
 import { showTaskSelectorChange, todoInformationChange } from '../actions/actionCreater';
 
 const TaskPrioritySelector = () => {
@@ -36,9 +36,9 @@ const TaskPrioritySelector = () => {
                 <span className='px-5 font-semibold text-white-primary text-[14px]'>Normal</span>
                 <img className='w-[20px] h-[20px] mr-3' src={Normalcon} alt="" />
             </div>
-            <div className={`py-1 px-2 my-2 rounded-[50px] bg-green-primary flex flex-row items-center justify-between shadow-md shadow-slate-800 transition hover:scale-105`} onClick={() => { setShowListOptions(false); setPriorityOfTaskOverview('slow');}}>
-                <span className='px-5 font-semibold text-white-primary text-[14px]'>Slow</span>
-                <img className='w-[20px] h-[20px] mr-3' src={SlowIcon} alt="" />
+            <div className={`py-1 px-2 my-2 rounded-[50px] bg-green-primary flex flex-row items-center justify-between shadow-md shadow-slate-800 transition hover:scale-105`} onClick={() => { setShowListOptions(false); setPriorityOfTaskOverview('low');}}>
+                <span className='px-5 font-semibold text-white-primary text-[14px]'>Low</span>
+                <img className='w-[20px] h-[20px] mr-3' src={LowIcon} alt="" />
             </div>
         </div>
     )

@@ -1,30 +1,36 @@
 import React, { useRef } from 'react';
-import AddIcon from '../assets/icon_add.png';
-import { useDispatch } from 'react-redux';
-import { listTaskNavigateChange } from '../actions/actionCreater';
+import { useDispatch, useSelector } from 'react-redux';
+import { filterInformationChange } from '../actions/actionCreater';
+import { filterInformationChangeSelector } from '../selectors/selectors';
 
 const ListTaskHeader = () => {
     const dispatch = useDispatch();
+    const filterData = useSelector(filterInformationChangeSelector);
 
+    const allNavigateRef = useRef(null);
     const todoNavigateRef = useRef(null);
-    const inprocessNavigateRef = useRef(null);
+    const inprogressNavigateRef = useRef(null);
     const doneNavigateRef = useRef(null);
     const overdueNavigateRef = useRef(null);
 
     function cleanNavigateClass(className) {
+        allNavigateRef.current.classList.remove(className);
         todoNavigateRef.current.classList.remove(className);
-        inprocessNavigateRef.current.classList.remove(className);
+        inprogressNavigateRef.current.classList.remove(className);
         doneNavigateRef.current.classList.remove(className);
         overdueNavigateRef.current.classList.remove(className);
     }
 
     function addClass(navigate, className) {
         switch (navigate) {
+            case 'all':
+                allNavigateRef.current.classList.add(className);
+                break;
             case 'todo':
                 todoNavigateRef.current.classList.add(className);
                 break;
-            case 'inprocess':
-                inprocessNavigateRef.current.classList.add(className);
+            case 'inprogress':
+                inprogressNavigateRef.current.classList.add(className);
                 break;
             case 'done':
                 doneNavigateRef.current.classList.add(className);
@@ -43,8 +49,9 @@ const ListTaskHeader = () => {
             addClass(navigate, 'active');
 
             dispatch(
-                listTaskNavigateChange({
-                    navigate: navigate
+                filterInformationChange({
+                    ...filterData,
+                    status: navigate,
                 })
             );
         }
@@ -60,11 +67,12 @@ const ListTaskHeader = () => {
     return (
         <div>
             <div className="header-navigate mb-5 px-5">
-                <div className='w-fit h-fit flex flex-row'>
-                    <span onMouseLeave={() => updateNavigate('unhover', '')} onMouseEnter={() => updateNavigate('hover', 'todo')} ref={todoNavigateRef} onClick={() => updateNavigate('click', 'todo')} className='custom-list-item active item-todo mr-10 text-[18px] font-bold text-green-primary cursor-pointer relative'>To Do</span>
-                    <span onMouseLeave={() => updateNavigate('unhover', '')} onMouseEnter={() => updateNavigate('hover', 'inprocess')} ref={inprocessNavigateRef} onClick={() => updateNavigate('click', 'inprocess')} className='custom-list-item item-inprocess mr-10 text-[18px] font-bold text-green-primary cursor-pointer relative'>In Progress</span>
-                    <span onMouseLeave={() => updateNavigate('unhover', '')} onMouseEnter={() => updateNavigate('hover', 'done')} ref={doneNavigateRef} onClick={() => updateNavigate('click', 'done')} className='custom-list-item item-done mr-10 text-[18px] font-bold text-green-primary cursor-pointer relative'>Done</span>
-                    <span onMouseLeave={() => updateNavigate('unhover', '')} onMouseEnter={() => updateNavigate('hover', 'overdue')} ref={overdueNavigateRef} onClick={() => updateNavigate('click', 'overdue')} className='custom-list-item item-overdue mr-10 text-[18px] font-bold text-green-primary cursor-pointer relative'>Overdue</span>
+                <div className='w-fit h-fit flex flex-row sm:gap-10 gap-5'>
+                    <div onMouseLeave={() => updateNavigate('unhover', '')} onMouseEnter={() => updateNavigate('hover', 'all')} ref={allNavigateRef} onClick={() => updateNavigate('click', 'all')} className='custom-list-item active item-todo text-[18px] font-bold text-green-primary cursor-pointer relative'>All</div>
+                    <div onMouseLeave={() => updateNavigate('unhover', '')} onMouseEnter={() => updateNavigate('hover', 'todo')} ref={todoNavigateRef} onClick={() => updateNavigate('click', 'todo')} className='custom-list-item item-todo text-[18px] font-bold text-green-primary cursor-pointer relative'>To Do</div>
+                    <div onMouseLeave={() => updateNavigate('unhover', '')} onMouseEnter={() => updateNavigate('hover', 'inprogress')} ref={inprogressNavigateRef} onClick={() => updateNavigate('click', 'inprogress')} className='custom-list-item item-inprogress text-[18px] font-bold text-green-primary cursor-pointer relative'>In Progress</div>
+                    <div onMouseLeave={() => updateNavigate('unhover', '')} onMouseEnter={() => updateNavigate('hover', 'done')} ref={doneNavigateRef} onClick={() => updateNavigate('click', 'done')} className='custom-list-item item-done text-[18px] font-bold text-green-primary cursor-pointer relative'>Done</div>
+                    <div onMouseLeave={() => updateNavigate('unhover', '')} onMouseEnter={() => updateNavigate('hover', 'overdue')} ref={overdueNavigateRef} onClick={() => updateNavigate('click', 'overdue')} className='custom-list-item item-overdue text-[18px] font-bold text-green-primary cursor-pointer relative'>Overdue</div>
                 </div>
             </div>
         </div>

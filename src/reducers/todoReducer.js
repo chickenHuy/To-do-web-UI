@@ -1,5 +1,6 @@
 const initState = {
     information: {
+        id: -1,
         priority: 'high',
         deadline: 'chicken',
         status: 'done',

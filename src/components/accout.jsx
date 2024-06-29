@@ -14,9 +14,9 @@ const Accout = () => {
             </div>
             <div className='flex flex-col justify-center pl-2'>
                 <span className='truncate text-black-primary text-[17px] font-semibold'>
-                    {accoutData.firstName === '' ? 'First name' : accoutData.firstName}
+                    {accoutData.firstName === '' ? 'User' : accoutData.firstName}
                     <span className='ml-1 truncate'>
-                        {accoutData.lastName === '' ? 'Last name' : accoutData.lastName}
+                        {accoutData.lastName === '' ? 'name' : accoutData.lastName}
                     </span>
                 </span>
                 <span className='truncate text-[14px] text-black-primary'>{accoutData.email === '' ? 'example@gmail.com' : accoutData.email}</span>

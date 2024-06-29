@@ -10,34 +10,21 @@ import DoneIcon from '../assets/icon_done.png';
 import OverdueIcon from '../assets/icon_overdue.png';
 import CloseIcon from '../assets/icon_close.png';
 import EditIcon from '../assets/icon_edit.png';
-import { coverSheetChange, showOverview, showTaskSelectorChange, todoInformationChange } from '../actions/actionCreater';
+import { showTaskSelectorChange, todoInformationChange } from '../actions/actionCreater';
 import TaskStatusSelector from './taskStatusSelector';
 import TaskDeadlineSelector from './taskDeadlineSelector';
 import TaskPrioritySelector from './taskPrioritySelector';
 
-const Overview = () => {
+const AddNewTask = ({ handleCloseClick, handleAddClick }) => {
 
     const dispatch = useDispatch();
     const todoData = useSelector(todoInformationChangeSelector);
 
     const showTaskSelectorData = useSelector(showTaskSelectorSelector);
-    const coverSheetData = useSelector(coverSheetSelector);
     const containerRef = useRef(null);
+    const textAreaRef = useRef(null);
 
-    const [description, setDescription] = useState(todoData.description);
-
-    function setShowOverview(show) {
-        dispatch(showOverview({
-            showOverview: show,
-        }));
-    }
-
-    function setShowCoverSheet(show) {
-        dispatch(coverSheetChange({
-            ...coverSheetData,
-            showCoverSheet: show,
-        }))
-    }
+    const [description, setDescription] = useState('');
 
     function setTodoInformation(description) {
         dispatch(todoInformationChange({
@@ -98,6 +85,17 @@ const Overview = () => {
     }, [todoData.description]);
 
     useEffect(() => {
+        dispatch(todoInformationChange({
+            ...todoData,
+            id: '',
+            priority: 'normal',
+            status: 'todo',
+            deadline: new Date().toLocaleDateString(),
+            description: '',
+        }));
+
+        textAreaRef.current.focus();
+
         document.addEventListener('mousedown', handleClickOutside);
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
@@ -107,11 +105,10 @@ const Overview = () => {
     return (
         <div ref={containerRef} className='w-full min-w-[425px] bg-white-primary rounded-lg px-7 shadow-lg shadow-slate-500 border-[1px] border-slate-300 py-10 relative'>
             <img className='w-[20px] h-[20px] absolute top-2 right-2 cursor-pointer hover:scale-110 duration-75' src={CloseIcon} alt="" onClick={() => {
-                setShowOverview(false);
-                setShowCoverSheet(false);
+                handleCloseClick('addNewTask', false);
                 setShowListOptions('all', false);
             }} />
-            <span className='px-3 pb-2 text-[20px] font-bold text-green-primary'>Task Overview</span>
+            <span className='px-3 pb-2 text-[20px] font-bold text-green-primary'>Add New Task</span>
             <div>
                 <div className='px-3 py-[3px] flex flex-row justify-start items-center my-2'>
                     <span className='min-w-[120px] font-bold text-[15px]'>Priority</span>
@@ -187,7 +184,7 @@ const Overview = () => {
                 <div className='px-3 pt-[5px] flex flex-row justify-start items-start my-2'>
                     <span className='min-w-[120px] font-bold text-[15px]'>Description</span>
                     <div className='h-fit flex-grow pl-7 mr-7 border-l-[3px] border-green-primary'>
-                        <textarea
+                        <textarea ref={textAreaRef}
                             className='w-full h-fit outline-none rounded-md bg-slate-300 px-6 py-1 shadow-md shadow-slate-400'
                             value={description}
                             onChange={(e) => {
@@ -197,9 +194,14 @@ const Overview = () => {
                         ></textarea>
                     </div>
                 </div>
+                <div className={`w-fit h-fit px-[60px] py-[7px] rounded-[70px] shadow-md shadow-slate-500 font-semibold text-[17px] mx-auto mt-5  duration-150 ${description.trim() === '' ? 'bg-gray-400' : 'bg-green-primary cursor-pointer hover:scale-105'}`} onClick={() => {
+                    if (description.trim() === '') return;
+                    handleAddClick();
+                    handleCloseClick(false);
+                }}>Add</div>
             </div>
         </div>
     )
 }
 
-export default Overview;
+export default AddNewTask;

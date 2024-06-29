@@ -1,6 +1,7 @@
 const initState = {
     information: {
         showOverview: false,
+        showAddNewTask: false,
     },
 }
 
