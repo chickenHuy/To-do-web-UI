@@ -1,4 +1,5 @@
 import DopdownIcon from '../assets/icon_dropdown.png';
+import DopdownIconWhite from '../assets/icon_dropdown_white.png';
 import AllIcon from '../assets/icon_all.png';
 import WeekIcon from '../assets/icon_week.png';
 import TomorrowIcon from '../assets/icon_tomorrow.png';
@@ -7,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { coverSheetSelector, filterInformationChangeSelector, showFilterSelector } from '../selectors/selectors';
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { coverSheetChange } from '../actions/actionCreater';
 import { convertDateToISO } from '../utils/utils';
 
@@ -18,6 +19,11 @@ const DeadlineSelector = () => {
     const showFilterData = useSelector(showFilterSelector);
     const [showDayPicker, setShowDayPicker] = useState(false);
     const coverSheetData = useSelector(coverSheetSelector);
+    const [darkMode, setDarkMode] = useState(false);
+
+    useEffect(() => {
+        document.documentElement.classList.contains('dark') ? setDarkMode(true) : setDarkMode(false);
+    }, [coverSheetData]);
 
     const setStatusFilter = (deadline) => {
         dispatch({
@@ -58,13 +64,13 @@ const DeadlineSelector = () => {
     }
 
     return (
-        <div className='flex flex-row items-center px-3 rounded-md shadow-sm shadow-slate-400 border-[1px] border-slate-300 relative'>
-            <span className='font-semibold text-[15px]'>Deadline</span>
-            <div className='w-[1px] h-4 rounded-md mx-2 bg-black-primary'></div>
-            <div className='w-[100px] h-[30px] bg-transparent font-bold text-[15px] text-green-primary cursor-pointer flex flex-row justify-between items-center' onClick={() => { setShowListOptions(true); setShowCoverSheet(true, '', 'bg-transparent') }}>
+        <div className='flex flex-row items-center px-3 rounded-md shadow-sm shadow-slate-400 dark:shadow-dark-primary border-[1px] border-slate-300 dark:border-dark-primary relative'>
+            <span className='font-semibold text-[15px] dark:text-white'>Deadline</span>
+            <div className='w-[1px] h-4 rounded-md mx-2 bg-black-primary dark:bg-white-primary'></div>
+            <div className='w-[100px] h-[30px] bg-transparent font-bold text-[15px] text-green-primary dark:text-white cursor-pointer flex flex-row justify-between items-center' onClick={() => { setShowListOptions(true); setShowCoverSheet(true, '', 'bg-transparent') }}>
                 <span>{filterData.deadline}</span>
-                <img className='w-[10px] h-[10px]' src={DopdownIcon} alt="" />
-                <div className={`z-10 absolute bg-green-secondary shadow-md shadow-slate-500 border-[1px] border-slate-300 w-full h-fit px-[7px] py-2 rounded-lg top-10 left-0 transition origin-top  ${showFilterData.deadline === '' && coverSheetData.showCoverSheet ? 'scale-100' : 'scale-0'}`}>
+                <img className='w-[10px] h-[10px]' src={darkMode ? DopdownIconWhite : DopdownIcon} alt="" />
+                <div className={`z-10 absolute bg-green-secondary dark:bg-dark-secondary shadow-md shadow-slate-500 dark:shadow-dark-primary border-[1px] border-slate-300 dark:border-dark-primary w-full h-fit px-[7px] py-2 rounded-lg top-10 left-0 transition origin-top  ${showFilterData.deadline === '' && coverSheetData.showCoverSheet ? 'scale-100' : 'scale-0'}`}>
                     <div className={`py-1 px-2 my-2 rounded-[50px] bg-slate-400 flex flex-row items-center justify-between shadow-md shadow-slate-800 transition hover:scale-105`} onClick={(e) => { e.stopPropagation(); setShowListOptions(false); setStatusFilter('All'); setShowCoverSheet(false, '', ''); }}>
                         <span className='px-5 font-semibold text-white-primary text-[14px]'>All</span>
                         <img className='w-[20px] h-[20px] mr-3' src={AllIcon} alt="" />

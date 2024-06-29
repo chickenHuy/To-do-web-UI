@@ -29,11 +29,11 @@ const HomeFilter = ({ handleActionSearch }) => {
                     </div> */}
                     <div className='flex flex-row gap-3'>
                         <DeadlineSelector />
-                        <img className='w-[30px] h-[30px] p-1 rounded-md border-[1px] border-slate-300 shadow-sm shadow-slate-400 cursor-pointer' src={CleanIcon} alt="" onClick={() => handleCleanClick()} />
+                        <img className='w-[30px] h-[30px] p-1 rounded-md border-[1px] border-slate-300 dark:border-dark-primary shadow-sm shadow-slate-400 dark:shadow-dark-primary cursor-pointer' src={CleanIcon} alt="" onClick={() => handleCleanClick()} />
                     </div>
                 </div>
                 <div className='xl:w-[25%] lg:mt-0 lg:ml-3 mt-2 w-full flex-grow lg:flex-grow-0'>
-                    <input className='w-full h-[40px] rounded-[70px] px-5 outline-none text-black-primary bg-transparent shadow-sm shadow-slate-400 border-[1px] border-slate-300' type="text" placeholder='Search task' onKeyDown={(e) => {
+                    <input className='w-full h-[40px] rounded-[70px] px-5 outline-none text-black-primary dark:text-white-primary bg-transparent shadow-sm shadow-slate-400 dark:shadow-dark-primary border-[1px] border-slate-300 dark:border-dark-primary' type="text" placeholder='Search task' onKeyDown={(e) => {
                         if (e.key === 'Enter') {
                             handleActionSearch(e.target.value.trim());
                             e.target.value = '';

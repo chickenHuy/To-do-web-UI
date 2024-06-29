@@ -13,13 +13,13 @@ const Accout = () => {
                 <img className='w-[50px] h-[50px] rounded-[50%]' src={accoutData.avatarUrl === '' ? DefaultAvatar : accoutData.avatarUrl} alt="" />
             </div>
             <div className='flex flex-col justify-center pl-2'>
-                <span className='truncate text-black-primary text-[17px] font-semibold'>
+                <span className='truncate text-black-primary dark:text-white-primary text-[17px] font-semibold'>
                     {accoutData.firstName === '' ? 'User' : accoutData.firstName}
                     <span className='ml-1 truncate'>
                         {accoutData.lastName === '' ? 'name' : accoutData.lastName}
                     </span>
                 </span>
-                <span className='truncate text-[14px] text-black-primary'>{accoutData.email === '' ? 'example@gmail.com' : accoutData.email}</span>
+                <span className='truncate text-[14px] text-black-primary dark:text-white-primary'>{accoutData.email === '' ? 'example@gmail.com' : accoutData.email}</span>
             </div>
         </div>
     )

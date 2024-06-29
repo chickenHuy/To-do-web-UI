@@ -105,28 +105,28 @@ const Overview = () => {
     }, []);
 
     return (
-        <div ref={containerRef} className='w-full min-w-[425px] bg-white-primary rounded-lg px-7 shadow-lg shadow-slate-500 border-[1px] border-slate-300 py-10 relative'>
+        <div ref={containerRef} className='w-full min-w-[425px] bg-white-primary dark:bg-dark-secondary rounded-lg px-7 shadow-lg shadow-slate-500 dark:shadow-dark-secondary border-[1px] border-slate-300 dark:border-dark-secondary py-10 relative'>
             <img className='w-[20px] h-[20px] absolute top-2 right-2 cursor-pointer hover:scale-110 duration-75' src={CloseIcon} alt="" onClick={() => {
                 setShowOverview(false);
                 setShowCoverSheet(false);
                 setShowListOptions('all', false);
             }} />
-            <span className='px-3 pb-2 text-[20px] font-bold text-green-primary'>Task Overview</span>
+            <span className='px-3 pb-2 text-[20px] font-bold text-green-primary dark:text-white-primary'>Task Overview</span>
             <div>
                 <div className='px-3 py-[3px] flex flex-row justify-start items-center my-2'>
-                    <span className='min-w-[120px] font-bold text-[15px]'>Priority</span>
-                    <div className='w-[3px] h-4 rounded-md mr-7 bg-green-primary'></div>
-                    <div className={`py-1 px-2 rounded-[50px] bg-slate-950 flex flex-row items-center animate-bounce shadow-md shadow-slate-800 ${todoData.priority === 'high' ? '' : 'hidden'}`} style={{ animationDuration: '0.3s' }}>
+                    <span className='min-w-[120px] font-bold text-[15px] dark:text-white-primary'>Priority</span>
+                    <div className='w-[3px] h-4 rounded-md mr-7 bg-green-primary dark:bg-white-primary'></div>
+                    <div className={`py-1 px-2 rounded-[50px] bg-slate-950 flex flex-row items-center animate-bounce shadow-md shadow-slate-800 dark:shadow-dark-primary ${todoData.priority === 'high' ? '' : 'hidden'}`} style={{ animationDuration: '0.3s' }}>
                         <span className='px-5 font-semibold text-white-primary'>High</span>
                         <img className='w-[20px] h-[20px]' src={HighIcon} alt="" />
                     </div>
 
-                    <div className={`py-1 px-2 rounded-[50px] bg-slate-800 flex flex-row items-center animate-bounce shadow-md shadow-slate-800 ${todoData.priority === 'normal' ? '' : 'hidden'}`} style={{ animationDuration: '0.5s' }}>
+                    <div className={`py-1 px-2 rounded-[50px] bg-slate-800 flex flex-row items-center animate-bounce shadow-md shadow-slate-800 dark:text-white-primary ${todoData.priority === 'normal' ? '' : 'hidden'}`} style={{ animationDuration: '0.5s' }}>
                         <span className='px-5 font-semibold text-white-primary'>Normal</span>
                         <img className='w-[20px] h-[20px]' src={NormalIcon} alt="" />
                     </div>
 
-                    <div className={`py-1 px-2 rounded-[50px] bg-green-primary flex flex-row items-center shadow-md shadow-slate-800 ${todoData.priority === 'low' ? '' : 'hidden'}`}>
+                    <div className={`py-1 px-2 rounded-[50px] bg-green-primary flex flex-row items-center shadow-md shadow-slate-800 dark:text-white-primary ${todoData.priority === 'low' ? '' : 'hidden'}`}>
                         <span className='px-5 font-semibold text-white-primary'>Low</span>
                         <img className='w-[20px] h-[20px]' src={LowIcon} alt="" />
                     </div>
@@ -139,9 +139,9 @@ const Overview = () => {
                 </div>
 
                 <div className='px-3 py-[3px] flex flex-row justify-start items-center my-2'>
-                    <span className='min-w-[120px] font-bold text-[15px]'>Deadline</span>
-                    <div className='w-[3px] h-4 rounded-md mr-7 bg-green-primary'></div>
-                    <div className={`py-1 px-2 rounded-[50px] bg-green-primary flex-row items-center shadow-md shadow-slate-500 ${todoData.deadline !== '' ? '' : 'hidden'}`}>
+                    <span className='min-w-[120px] font-bold text-[15px] dark:text-white-primary'>Deadline</span>
+                    <div className='w-[3px] h-4 rounded-md mr-7 bg-green-primary dark:bg-white-primary'></div>
+                    <div className={`py-1 px-2 rounded-[50px] bg-green-primary flex-row items-center shadow-md shadow-slate-500 dark:shadow-dark-primary ${todoData.deadline !== '' ? '' : 'hidden'}`}>
                         <span className='px-5 font-semibold text-white-primary'>{todoData.deadline}</span>
                     </div>
                     <div className='flex-grow flex flex-row justify-end relative'>
@@ -154,27 +154,23 @@ const Overview = () => {
                 </div>
 
                 <div className='px-3 py-[3px] flex flex-row justify-start items-center my-2'>
-                    <span className='min-w-[120px] font-bold text-[15px] break-words'>Status</span>
-                    <div className='w-[3px] h-4 rounded-md mr-7 bg-green-primary'></div>
-                    <div className={`py-1 px-2 rounded-[50px] bg-slate-600 flex flex-row items-center shadow-md shadow-slate-800 ${todoData.status === 'todo' ? '' : 'hidden'}`}>
+                    <span className='min-w-[120px] font-bold text-[15px] dark:text-white-primary'>Status</span>
+                    <div className='w-[3px] h-4 rounded-md mr-7 bg-green-primary dark:bg-white-primary'></div>
+                    <div className={`py-1 px-2 rounded-[50px] bg-slate-600 flex flex-row items-center shadow-md shadow-slate-800 dark:shadow-dark-primary ${todoData.status === 'todo' ? '' : 'hidden'}`}>
                         <span className='px-5 font-semibold text-white-primary'>To Do</span>
                         <img className='w-[20px] h-[20px]' src={TodoIcon} alt="" />
                     </div>
 
-                    <div className={`py-1 px-2 rounded-[50px] bg-slate-800 flex flex-row items-center shadow-md shadow-slate-800 ${todoData.status === 'inprogress' ? '' : 'hidden'}`}>
+                    <div className={`py-1 px-2 rounded-[50px] bg-slate-800 flex flex-row items-center shadow-md shadow-slate-800 dark:shadow-dark-primary ${todoData.status === 'inprogress' ? '' : 'hidden'}`}>
                         <span className='px-5 font-semibold text-white-primary'>In Progress</span>
                         <img className='w-[20px] h-[20px]' src={InprogressIcon} alt="" />
                     </div>
 
-                    <div className={`py-1 px-2 rounded-[50px] bg-green-primary flex flex-row items-center shadow-md shadow-slate-500 ${todoData.status === 'done' ? '' : 'hidden'}`}>
+                    <div className={`py-1 px-2 rounded-[50px] bg-green-primary flex flex-row items-center shadow-md shadow-slate-500 dark:shadow-dark-primary ${todoData.status === 'done' ? '' : 'hidden'}`}>
                         <span className='px-5 font-semibold text-white-primary'>Done</span>
                         <img className='w-[20px] h-[20px]' src={DoneIcon} alt="" />
                     </div>
 
-                    <div className={`py-1 px-2 rounded-[50px] bg-slate-950 flex flex-row items-center animate-bounce shadow-md shadow-slate-800 ${todoData.status === 'overdue' ? '' : 'hidden'}`} style={{ animationDuration: '0.3s' }}>
-                        <span className='px-5 font-semibold text-white-primary'>Overdue</span>
-                        <img className='w-[20px] h-[20px]' src={OverdueIcon} alt="" />
-                    </div>
                     <div className='flex-grow flex flex-row justify-end relative'>
                         <TaskStatusSelector />
                         <img className='w-[25px] h-[25px] cursor-pointer hover:scale-110' src={EditIcon} alt="" onClick={() => {
@@ -185,10 +181,10 @@ const Overview = () => {
                 </div>
 
                 <div className='px-3 pt-[5px] flex flex-row justify-start items-start my-2'>
-                    <span className='min-w-[120px] font-bold text-[15px]'>Description</span>
-                    <div className='h-fit flex-grow pl-7 mr-7 border-l-[3px] border-green-primary'>
+                    <span className='min-w-[120px] font-bold text-[15px] dark:text-white-primary'>Description</span>
+                    <div className='h-fit flex-grow pl-7 mr-7 border-l-[3px] border-green-primary dark:border-white-primary'>
                         <textarea
-                            className='w-full h-fit outline-none rounded-md bg-slate-300 px-6 py-1 shadow-md shadow-slate-400'
+                            className='w-full h-fit outline-none rounded-md bg-slate-300 dark:bg-[#353433] px-6 py-1 shadow-md shadow-slate-400 dark:shadow-dark-primary dark:text-white-primary'
                             value={description}
                             onChange={(e) => {
                                 setDescription(e.target.value);

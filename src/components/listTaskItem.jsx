@@ -64,7 +64,7 @@ const ListTaskItem = ({ id, priority, description, deadline, status }) => {
     },);
 
     return (
-        <div className={`w-full h-full bg-white-primary cursor-pointer p-3 rounded-md shadow-md shadow-slate-400 ${coverSheetData.showCoverSheet ? '' : 'hover:scale-[1.03]'}  duration-75 flex flex-col`} onClick={() => {
+        <div className={`w-full h-full bg-white-primary dark:bg-[#353433] cursor-pointer p-3 rounded-md shadow-md shadow-slate-400 dark:shadow-dark-primary ${coverSheetData.showCoverSheet ? '' : 'hover:scale-[1.03]'}  duration-75 flex flex-col`} onClick={() => {
             if (taskNavigateData.navigate === 'my-day' || taskNavigateData.navigate === 'custom') {
                 setDataOfOverview();
                 setShowOverview(true);
@@ -72,7 +72,7 @@ const ListTaskItem = ({ id, priority, description, deadline, status }) => {
             }
         }}>
             <div className='flex flex-row justify-between items-center relative'>
-                <div className={`py-1 px-2 rounded-[50px] flex flex-row items-center animate-bounce shadow-md  ${priority === 'high' ? 'bg-slate-950 shadow-slate-800 animate-bounce' : priority === 'normal' ? 'bg-slate-700 shadow-slate-600 animate-none' : 'bg-green-primary shadow-slate-400 animate-none'}`} style={{ animationDuration: '0.25s' }}>
+                <div className={`py-1 px-2 rounded-[50px] flex flex-row items-center animate-bounce shadow-md dark:shadow-dark-secondary  ${priority === 'high' ? 'bg-slate-950 shadow-slate-800 animate-bounce' : priority === 'normal' ? 'bg-slate-700 shadow-slate-600 animate-none' : 'bg-green-primary shadow-slate-400 animate-none'}`} style={{ animationDuration: '0.25s' }}>
                     <span className='px-5 font-semibold text-white-primary'>{priority === 'high' ? 'High' : priority === 'normal' ? 'Normal' : 'Low'}</span>
                     <img className='w-[20px] h-[20px]' src={priority === 'high' ? HighIcon : priority === 'normal' ? NormalIcon : LowIcon} alt="" />
                 </div>
@@ -93,12 +93,12 @@ const ListTaskItem = ({ id, priority, description, deadline, status }) => {
                 </div>
             </div>
             <div className='flex-grow'>
-                <div className="text-container bg-slate-100 rounded-md shadow-sm shadow-slate-300 p-3 my-3">
+                <div className={`text-container bg-slate-100 dark:bg-dark-secondary rounded-md shadow-sm shadow-slate-300 dark:shadow-dark-secondary dark:text-white-primary p-3 my-3 ${status === 'done' ? 'line-through' : ''}`}>
                     {description !== undefined ? description : ''}
                 </div>
             </div>
             <div className='flex flex-row justify-end items-center'>
-                <div className={`px-5 py-1 ml-2 rounded-[70px] flex flex-row justify-between items-center shadow-md text-white-primary ${status === 'todo' ? 'bg-slate-500 shadow-slate-400' : status === 'inprogress' ? 'bg-slate-700 shadow-slate-500' : status === 'done' ? 'bg-green-primary shadow-slate-400' : ''}`}>
+                <div className={`px-5 py-1 ml-2 rounded-[70px] flex flex-row justify-between items-center shadow-md text-white-primary dark:shadow-dark-secondary ${status === 'todo' ? 'bg-slate-500 shadow-slate-400' : status === 'inprogress' ? 'bg-slate-700 shadow-slate-500' : status === 'done' ? 'bg-green-primary shadow-slate-400' : ''}`}>
                     <span>{deadline !== undefined ? deadline : 'Chicken'}</span>
                     <img className='w-[20px] h-[20px] ml-2' src={status === 'todo' ? TodoIcon : status === 'inprogress' ? InprogressIcon : status === 'done' ? DoneIcon : ''} alt="" />
                 </div>

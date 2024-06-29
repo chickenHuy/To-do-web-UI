@@ -103,8 +103,8 @@ const EditProfile = () => {
 
 
     return (
-        <div className='z-10 bg-white-primary flex flex-col items-center py-7 rounded-md shadow-sm shadow-slate-300 relative overflow-hidden'>
-            <div ref={notifyContainer} className={`absolute right-0 top-[40px] px-3 py-2 max-w-[90%] rounded-md shadow-md shadow-slate-500 duration-300 ${showNotify ? '-translate-x-[5%]' : 'translate-x-[105%]'} ${error ? 'bg-red-500' : 'bg-green-primary'}`}>
+        <div className='z-10 bg-white-primary dark:bg-dark-secondary flex flex-col items-center py-7 rounded-md shadow-sm shadow-slate-300 dark:shadow-dark-primary relative overflow-hidden'>
+            <div ref={notifyContainer} className={`absolute right-0 top-[40px] px-3 py-2 max-w-[90%] rounded-md shadow-md shadow-slate-500 dark:shadow-dark-primary duration-300 ${showNotify ? '-translate-x-[5%]' : 'translate-x-[105%]'} ${error ? 'bg-red-500' : 'bg-green-primary'}`}>
                 <div className='flex flex-row items-center'>
                     <img className='w-[20px] h-[20px]' src={error ? ErrorIcon : SuccessIcon} alt="" />
                     <span className='font-semibold mx-2'>{error ? 'Error' : 'Success'}</span>
@@ -122,7 +122,7 @@ const EditProfile = () => {
             <Input tittle={'Last name'} type={'text'} placeHolder={'Enter your last name'} selector={accoutInformationSelector} value={accountData.lastName} fieldName={'lastName'} />
 
             <div className='w-full h-fit px-11 my-4'>
-                <span className={`w-fit h-fit px-3 py-2 rounded-md shadow-md shadow-slate-400 font-semibold cursor-pointer ${changePassword ? 'bg-gray-300' : 'bg-green-secondary'}`} onClick={() => setChangePassword(!changePassword)}>{changePassword ? 'Cancel change password' : 'Change password'}</span>
+                <span className={`w-fit h-fit px-3 py-2 rounded-md shadow-md shadow-slate-400 dark:shadow-dark-primary font-semibold cursor-pointer dark:text-white-primary ${changePassword ? 'bg-gray-300 dark:bg-gray-500' : 'bg-green-secondary dark:bg-[#353433]'}`} onClick={() => setChangePassword(!changePassword)}>{changePassword ? 'Cancel change password' : 'Change password'}</span>
             </div>
             <div className={`${changePassword ? '' : 'hidden'}`}>
                 <Input tittle={'Current password'} type={'password'} placeHolder={'Enter current password'} selector={accoutInformationSelector} fieldName={'currentPassword'} />
@@ -130,7 +130,7 @@ const EditProfile = () => {
                 <Input tittle={'Confirm password'} type={'password'} placeHolder={'Confirm password'} selector={accoutInformationSelector} fieldName={'confirmPassword'} />
             </div>
 
-            <span className='w-fit h-fit px-7 py-2 mt-5 mb-3 rounded-md shadow-md shadow-slate-400 font-semibold cursor-pointer bg-green-primary' onClick={() => {
+            <span className='w-fit h-fit px-7 py-2 mt-5 mb-3 rounded-md shadow-md shadow-slate-400 dark:shadow-dark-primary font-semibold cursor-pointer bg-green-primary' onClick={() => {
                 handleSaveChangeClick();
             }}>Save change</span>
         </div>

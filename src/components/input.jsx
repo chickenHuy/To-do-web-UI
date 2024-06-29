@@ -61,9 +61,9 @@ export const Input = ({ tittle, placeHolder, type, selector, fieldName, value, r
 
     return (
         <div className='flex flex-col w-[350px]'>
-            <label className='font-bold text-[15px]'>{tittle !== undefined ? tittle : 'Title'}</label>
+            <label className='font-bold text-[15px] dark:text-white-primary my-1'>{tittle !== undefined ? tittle : 'Title'}</label>
             <input
-                className={`h-[40px] px-2 rounded-md outline-none border-[1px] bg-transparent ${readOnly ? 'text-slate-500' : ''} ${onFocus ? 'border-green-primary border-[2px]' : 'border-[#777777] border-[1px]'}`}
+                className={`h-[40px] px-2 rounded-md outline-none border-[1px] bg-transparent dark:text-white-primary ${readOnly ? 'text-slate-500 dark:text-slate-600' : ''} ${onFocus ? 'border-green-primary dark:border-white-primary border-[2px]' : 'border-[#777777] border-[1px]'}`}
                 type={type !== undefined ? type : 'text'}
                 placeholder={placeHolder !== undefined ? placeHolder : ''}
                 onFocus={() => setOnFocus(true)}

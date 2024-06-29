@@ -40,9 +40,19 @@ code {
 
 .custom-list-item.active::after{
   transform: scale(1);
+  background-color: theme('colors.green-primary');
 }
 .custom-list-item.hover::after{
   transform: scale(1);
+  background-color: theme('colors.green-primary');
+}
+.custom-list-item.dark.active::after{
+  transform: scale(1);
+  background-color: theme('colors.white');
+}
+.custom-list-item.dark.hover::after{
+  transform: scale(1);
+  background-color: theme('colors.white');
 }
 .custom-list-item::after{
   content: '';

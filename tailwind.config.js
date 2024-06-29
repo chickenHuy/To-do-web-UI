@@ -3,6 +3,7 @@ module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -10,6 +11,8 @@ module.exports = {
         'black-primary': '#282A35',
         'green-primary': '#059862',
         'green-secondary': '#D9EEE1',
+        'dark-secondary' : '#252423',
+        'dark-primary' : '#11100F',
       }
     },
   },

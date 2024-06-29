@@ -7,14 +7,14 @@ const data = [
                     id: 1,
                     priority: 'high',
                     deadline: '6/20/2024',
-                    status: 'todo',
+                    status: 'done',
                     description: 'Learn React'
                 },
                 {
                     id: 2,
                     priority: 'normal',
                     deadline: '6/20/2024',
-                    status: 'todo',
+                    status: 'inprogress',
                     description: 'Learn Redux'
                 },
                 {
@@ -28,14 +28,14 @@ const data = [
                     id: 4,
                     priority: 'high',
                     deadline: '6/21/2024',
-                    status: 'todo',
+                    status: 'done',
                     description: 'Learn TypeScript'
                 },
                 {
                     id: 5,
                     priority: 'normal',
                     deadline: '6/22/2024',
-                    status: 'todo',
+                    status: 'inprogress',
                     description: 'Learn GraphQL'
                 },
                 {
@@ -56,7 +56,7 @@ const data = [
                     id: 8,
                     priority: 'normal',
                     deadline: '6/25/2024',
-                    status: 'todo',
+                    status: 'done',
                     description: 'Write unit tests'
                 },
                 {
@@ -90,7 +90,7 @@ const data = [
                             id: 2,
                             priority: 'normal',
                             deadline: '6/20/2024',
-                            status: 'todo',
+                            status: 'inprogress',
                             description: 'Learn Kotlin'
                         },
                         {
@@ -104,14 +104,14 @@ const data = [
                             id: 4,
                             priority: 'normal',
                             deadline: '6/21/2024',
-                            status: 'todo',
+                            status: 'done',
                             description: 'Learn Dagger'
                         },
                         {
                             id: 5,
                             priority: 'low',
                             deadline: '6/22/2024',
-                            status: 'todo',
+                            status: 'inprogress',
                             description: 'Learn Jetpack Compose'
                         },
                         {
@@ -125,7 +125,7 @@ const data = [
                             id: 7,
                             priority: 'normal',
                             deadline: '6/24/2024',
-                            status: 'todo',
+                            status: 'done',
                             description: 'Integrate Google Maps'
                         },
                         {
@@ -145,14 +145,14 @@ const data = [
                             id: 1,
                             priority: 'high',
                             deadline: '6/20/2024',
-                            status: 'todo',
+                            status: 'inprogress',
                             description: 'Learn HTML'
                         },
                         {
                             id: 2,
                             priority: 'normal',
                             deadline: '6/20/2024',
-                            status: 'todo',
+                            status: 'done',
                             description: 'Learn CSS'
                         },
                         {
@@ -173,14 +173,14 @@ const data = [
                             id: 5,
                             priority: 'normal',
                             deadline: '6/24/2024',
-                            status: 'todo',
+                            status: 'done',
                             description: 'Learn Vue.js'
                         },
                         {
                             id: 6,
                             priority: 'high',
                             deadline: '6/25/2024',
-                            status: 'todo',
+                            status: 'inprogress',
                             description: 'Learn Next.js'
                         },
                         {
@@ -194,7 +194,7 @@ const data = [
                             id: 8,
                             priority: 'low',
                             deadline: '6/27/2024',
-                            status: 'todo',
+                            status: 'done',
                             description: 'Learn Sass'
                         }
                     ]
@@ -214,14 +214,14 @@ const data = [
                             id: 2,
                             priority: 'normal',
                             deadline: '6/20/2024',
-                            status: 'todo',
+                            status: 'inprogress',
                             description: 'Learn XSS'
                         },
                         {
                             id: 3,
                             priority: 'low',
                             deadline: '6/20/2024',
-                            status: 'todo',
+                            status: 'done',
                             description: 'Learn CSRF'
                         },
                         {
@@ -235,14 +235,14 @@ const data = [
                             id: 5,
                             priority: 'normal',
                             deadline: '6/26/2024',
-                            status: 'todo',
+                            status: 'inprogress',
                             description: 'Learn OAuth'
                         },
                         {
                             id: 6,
                             priority: 'high',
                             deadline: '6/27/2024',
-                            status: 'todo',
+                            status: 'done',
                             description: 'Learn JWT'
                         },
                         {
@@ -256,7 +256,7 @@ const data = [
                             id: 8,
                             priority: 'low',
                             deadline: '6/29/2024',
-                            status: 'todo',
+                            status: 'inprogress',
                             description: 'Learn OpenID Connect'
                         }
                     ]
@@ -276,14 +276,14 @@ const data = [
                             id: 2,
                             priority: 'normal',
                             deadline: '6/28/2024',
-                            status: 'todo',
+                            status: 'inprogress',
                             description: 'Learn Pandas'
                         },
                         {
                             id: 3,
                             priority: 'low',
                             deadline: '6/29/2024',
-                            status: 'todo',
+                            status: 'done',
                             description: 'Learn NumPy'
                         },
                         {
@@ -296,30 +296,124 @@ const data = [
                         {
                             id: 5,
                             priority: 'normal',
-                            deadline: '6/01/2024',
-                            status: 'todo',
+                            deadline: '7/01/2024',
+                            status: 'inprogress',
                             description: 'Learn Data Visualization'
                         },
                         {
                             id: 6,
                             priority: 'high',
                             deadline: '7/02/2024',
-                            status: 'todo',
+                            status: 'done',
                             description: 'Learn TensorFlow'
-                        },
-                    ],
-                },
-            ],
+                        }
+                    ]
+                }
+            ]
         }
     },
     {
         userId: 2,
         data: {
             "my-day": [
-
+                {
+                    id: 1,
+                    priority: 'high',
+                    deadline: '6/20/2024',
+                    status: 'todo',
+                    description: 'Complete project report'
+                },
+                {
+                    id: 2,
+                    priority: 'normal',
+                    deadline: '6/21/2024',
+                    status: 'inprogress',
+                    description: 'Prepare for meeting'
+                },
+                {
+                    id: 3,
+                    priority: 'low',
+                    deadline: '6/22/2024',
+                    status: 'done',
+                    description: 'Organize workspace'
+                },
+                {
+                    id: 4,
+                    priority: 'high',
+                    deadline: '6/23/2024',
+                    status: 'inprogress',
+                    description: 'Update software'
+                }
             ],
             "custom": [
-
+                {
+                    id: 1,
+                    name: "Fitness Goals",
+                    tasks: [
+                        {
+                            id: 1,
+                            priority: 'high',
+                            deadline: '6/20/2024',
+                            status: 'todo',
+                            description: 'Morning run'
+                        },
+                        {
+                            id: 2,
+                            priority: 'normal',
+                            deadline: '6/21/2024',
+                            status: 'done',
+                            description: 'Yoga session'
+                        },
+                        {
+                            id: 3,
+                            priority: 'low',
+                            deadline: '6/22/2024',
+                            status: 'inprogress',
+                            description: 'Strength training'
+                        },
+                        {
+                            id: 4,
+                            priority: 'high',
+                            deadline: '6/23/2024',
+                            status: 'todo',
+                            description: 'Swim practice'
+                        }
+                    ]
+                },
+                {
+                    id: 2,
+                    name: "Cooking Recipes",
+                    tasks: [
+                        {
+                            id: 1,
+                            priority: 'high',
+                            deadline: '6/20/2024',
+                            status: 'done',
+                            description: 'Bake a cake'
+                        },
+                        {
+                            id: 2,
+                            priority: 'normal',
+                            deadline: '6/21/2024',
+                            status: 'inprogress',
+                            description: 'Cook pasta'
+                        },
+                        {
+                            id: 3,
+                            priority: 'low',
+                            deadline: '6/22/2024',
+                            status: 'todo',
+                            description: 'Make salad'
+                        },
+                        {
+                            id: 4,
+                            priority: 'high',
+                            deadline: '6/23/2024',
+                            status: 'done',
+                            description: 'Grill chicken'
+                        }
+                    ]
+                }
             ]
         }
     }

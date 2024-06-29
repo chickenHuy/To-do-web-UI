@@ -64,6 +64,15 @@ class DataManager {
         return custom.map(item => item.name);
     }
 
+    getNameOfCustomItem(id) {
+        let custom = this.getListCustom();
+        for (let item of custom) {
+            if (item.id === id) {
+                return item.name;
+            }
+        }
+    }
+
     updateTask(navigate, id, newTask) {
         let tasks;
 

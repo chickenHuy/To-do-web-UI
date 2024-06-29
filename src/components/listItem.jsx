@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import DefaultIcon from '../assets/thanh_huy.png'
-import RemoveIcon from '../assets/icon_remove.png'
-import RenameIcon from '../assets/icon_edit.png'
 import { useDispatch, useSelector } from 'react-redux';
 import { coverSheetChange, listTaskNavigateChange } from '../actions/actionCreater';
 import { coverSheetSelector, listTaskNavigateChangeSelector } from '../selectors/selectors';
@@ -27,6 +25,7 @@ const ListItem = ({ name, iconSrc, isCustom, navigate, id }) => {
         dispatch(listTaskNavigateChange({
             ...navigateData,
             navigate: navigate,
+            name: name,
             id: id,
         }));
     }
@@ -89,38 +88,36 @@ const ListItem = ({ name, iconSrc, isCustom, navigate, id }) => {
 
     return (
         <div className='w-full h-fit relative'>
-            <div ref={listItem} className={`h-fix cursor-pointer rounded-md hover:bg-green-secondary hover:shadow-md transition flex flex-row flex-grow items-center justify-start px-7 py-[10px] mx-3 mb-1 ${navigateData.navigate === navigate && navigateData.id === id ? 'bg-green-secondary text-black' : 'bg-transparent text-white'}`} onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)} onClick={() => setListTaskNavigate(navigate, id)}>
-                <img className={`${isCustom !== undefined && isCustom === true ? 'w-[25px] h-[25px]' : 'w-[30px] h-[30px]'}`} src={iconSrc !== undefined ? iconSrc : DefaultIcon} alt="" />
-                <input ref={nameItem} type="text" className={`ml-3 text-[16px] bg-transparent outline-none truncate ${isEdit ? '' : 'cursor-pointer'} ${isHover || (navigateData.navigate === navigate && navigateData.id === id) ? 'text-black-primary font-semibold' : 'text-white-primary'}`} readOnly={!isEdit} value={itemName} onChange={(e) => {
-                    setItemName(e.target.value);
-                }} onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                        setIsEdit(false);
-                        handleRenameItem();
-                    }
-                }} />
+            <div ref={listItem} className={`h-fix cursor-pointer rounded-md hover:bg-green-secondary dark:hover:bg-dark-secondary hover:shadow-md transition flex flex-row flex-grow items-center justify-start px-7 py-[10px] mx-3 mb-1 ${navigateData.navigate === navigate && navigateData.id === id ? 'bg-green-secondary dark:bg-dark-secondary text-black dakr:text-white' : 'bg-transparent text-white'}`} onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)} onClick={() => setListTaskNavigate(navigate, id)}>
+            <img className={`${isCustom !== undefined && isCustom === true ? 'w-[25px] h-[25px]' : 'w-[30px] h-[30px]'}`} src={iconSrc !== undefined ? iconSrc : DefaultIcon} alt="" />
+            <input ref={nameItem} type="text" className={`ml-3 text-[16px] bg-transparent outline-none dark:text-white truncate ${isEdit ? '' : 'cursor-pointer'} ${isHover || (navigateData.navigate === navigate && navigateData.id === id) ? 'text-black-primary font-semibold' : 'text-white-primary'}`} readOnly={!isEdit} value={itemName} onChange={(e) => {
+                setItemName(e.target.value);
+            }} onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                    setIsEdit(false);
+                    handleRenameItem();
+                }
+            }} />
 
-            </div >
-            <div className={`absolute z-20 top-1/2 right-0  w-fit h-fit py-4 px-3 rounded-md bg-green-secondary flex flex-col gap-2 items-center shadow-md shadow-slate-600 transition origin-top ${showListOption ? 'scale-100' : 'scale-0'}`}>
-                <div className='flex flex-row items-center cursor-pointer' onClick={() => {
-                    setIsEdit(true);
-                    setShowListOption(false);
-                    nameItem.current.focus();
-                    nameItem.current.select();
-                }}>
-                    <img className='w-[20px] h-[20px] mr-2' src={RenameIcon} alt="" />
-                    <span className='text-black hover:font-semibold w-full h-fit'>Rename</span>
-                </div>
-                <div className='flex flex-row items-center cursor-pointer' onClick={() => {
-                    setShowListOption(false);
-                    handleRemoveItem();
-                    setShowCoverSheet(false);
-                }}>
-                    <img className='w-[20px] h-[20px] mr-2' src={RemoveIcon} alt="" />
-                    <span className='text-black hover:font-semibold w-full h-fit'>Remove</span>
-                </div>
+        </div >
+        <div className={`z-10 absolute top-1/2 right-3 w-fit h-fit py-4 px-3 rounded-md bg-green-secondary dark:bg-dark-secondary flex flex-col gap-2 items-center shadow-md shadow-slate-600 dark:shadow-slate-900 transition origin-top ${showListOption ? 'scale-100' : 'scale-0'}`}>
+            <div className='flex flex-row items-center cursor-pointer px-3' onClick={() => {
+                setIsEdit(true);
+                setShowListOption(false);
+                nameItem.current.focus();
+                nameItem.current.select();
+            }}>
+                <span className='text-black dark:text-white hover:font-semibold w-full h-fit'>Rename</span>
+            </div>
+            <div className='flex flex-row items-center cursor-pointer px-3' onClick={() => {
+                setShowListOption(false);
+                handleRemoveItem();
+                setShowCoverSheet(false);
+            }}>
+                <span className='text-black dark:text-white hover:font-semibold w-full h-fit'>Remove</span>
             </div>
         </div>
+    </div>
     )
 }
 

@@ -341,7 +341,7 @@ const Home = () => {
                     </div>
                 </div>
                 <div className="wrapper__body flex-grow flex flex-row overflow-hidden">
-                    <div className={`wrapper__navigate rounded-b-lg xl:min-w-[20%] h-full bg-green-primary dark:bg-dark-primary flex flex-col items-center overflow-auto duration-300 origin-top-left`}>
+                    <div className={`wrapper__navigate rounded-b-lg xl:min-w-[20%] h-full bg-green-primary dark:bg-dark-primary flex flex-col items-center overflow-auto duration-300 origin-top-left ${screenWidth <= 750 ? showMenu ? 'min-w-[25px] absolute z-10 scale-100' : 'w-0 scale-0' : 'min-w-[250px]'}`}>
                         <div className='w-3/4 h-[1px] rounded-md bg-black-primary'></div>
                         <div className="navigate-list-main w-full h-fix my-5">
                             <ListItem name={'My day'} iconSrc={SunIcon} navigate={'my-day'} id={''} />
